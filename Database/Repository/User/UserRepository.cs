@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Contracts.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Database.Repository.User
 {
-    public class UserRepository
+    public class UserRepository: IUserRepository
     {
         private readonly SystemDbContext dbContext;
         public UserRepository(SystemDbContext dbContext)
