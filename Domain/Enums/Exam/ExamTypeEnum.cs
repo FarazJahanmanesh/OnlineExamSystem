@@ -8,5 +8,8 @@ namespace Domain.Enums.Exam
 {
     public enum ExamTypeEnum
     {
+        Tashrihi = 1,
+        Testi = 2,
+        Tarkibi =3
     }
 }

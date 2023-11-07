@@ -8,5 +8,7 @@ namespace Domain.Enums.User
 {
     public enum UserRoleEnum
     {
+        Student=1,
+        Teacher=2
     }
 }
