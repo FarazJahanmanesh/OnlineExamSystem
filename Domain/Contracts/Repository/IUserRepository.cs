@@ -8,7 +8,7 @@ namespace Domain.Contracts.Repository
 {
     public interface IUserRepository
     {
-        public Task UserExsist();
+        public Task UserExsist(int id);
         public Task ChangePassword();
         public Task UpdateUser();
         public Task GetUser();
