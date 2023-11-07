@@ -17,4 +17,8 @@
     <Folder Include="Models\Response\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dependencies\Dependencies.csproj" />
+  </ItemGroup>
+
 </Project>
