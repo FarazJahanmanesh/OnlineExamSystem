@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Application.Services;
+using Database.Repository.User;
+using Domain.Contracts.Repository;
+using Domain.Contracts.Services;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +16,8 @@ namespace Dependencies.Dependencies
         public static void RegisterServices(this IServiceCollection services)
         {
             #region add Dependencies
+            services.AddScoped< IUserServices , UserServices > ();
+            services.AddScoped<IUserRepository, UserRepository>();
             #endregion
         }
     }

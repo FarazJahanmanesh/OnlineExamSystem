@@ -1,5 +1,7 @@
 using Database;
+using Dependencies.Dependencies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//db context
 string connectionString = builder.Configuration.GetConnectionString("");
 builder.Services.AddDbContext<SystemDbContext>(options=>options.UseSqlServer(connectionString));
+
+//add di 
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 
