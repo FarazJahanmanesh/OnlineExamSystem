@@ -10,6 +10,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public float FinallScore { get; set; }
-        public List<Question>
+        public List<Question> Questions { get; set; }
+        public List<User>? Users { get; set; }
     }
 }

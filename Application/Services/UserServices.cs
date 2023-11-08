@@ -10,16 +10,15 @@ namespace Application.Services
 {
     public class UserServices : IUserServices
     {
+        #region ctor 
         private readonly IUserRepository repository;
         public UserServices(IUserRepository repository)
         {
             this.repository = repository;
         }
-        public async Task ChangePassword()
-        {
-            await repository.ChangePassword();
-        }
+        #endregion
 
+        #region crud
         public async Task CreateUser()
         {
             await repository.CreateUser();
@@ -45,9 +44,18 @@ namespace Application.Services
             await repository.UpdateUser();
         }
 
-        public async Task UserExsist()
-        { 
-            await repository.UserExsist();
+        #endregion
+
+        #region other methods
+        public async Task ChangePassword()
+        {
+            await repository.ChangePassword();
         }
+
+        public async Task UserExsist()
+        {
+            await repository.UserExsist(3);
+        }
+        #endregion
     }
 }

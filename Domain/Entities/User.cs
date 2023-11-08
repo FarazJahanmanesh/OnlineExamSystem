@@ -16,5 +16,6 @@ namespace Domain.Entities
         public string Password { get; set; }
         public string? Email { get; set; }
         public UserRoleEnum UserRole { get; set; }
+        public List<Exam>? Exams { get; set; }
     }
 }
