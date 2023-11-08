@@ -2,22 +2,25 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { HomePageComponent } from './home-page.component';
+import { HomePageRoutingModule } from './home-page-routing.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        LoginRoutingModule,
+        HomePageRoutingModule,
         ReactiveFormsModule,
-        FormsModule,
+        FormsModule,LoginModule
     ],
     declarations: [
-        LoginFormComponent,
+        HomePageComponent,
     ],
     exports: [
-        LoginFormComponent,
+        HomePageComponent,
     ],
-})
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA,
+        NO_ERRORS_SCHEMA
+    ],
+}) 
 export class LoginModule { }
- 
