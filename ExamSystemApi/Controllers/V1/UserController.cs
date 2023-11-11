@@ -1,4 +1,9 @@
-﻿using Domain.Contracts.Services;
+﻿using Domain.Common.Response;
+using Domain.Contracts.Services;
+using Domain.Dtos.UserDtos;
+using ExamSystemApi.Models.Request;
+using ExamSystemApi.Models.Response;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,12 +18,37 @@ namespace ExamSystemApi.Controllers.V1
         {
             this.services = services;
         }
-        [HttpGet]
-        [Route("UserExsist")]
-        public async Task<IActionResult> UserExsist()
+        [HttpPost]
+        [Route("UserLogin")]
+        public async Task<IActionResult> UserLogin([FromBody] UserLoginRequest request)
         {
-            await services.UserExsist();
-            return Ok();
+            var response = new ActionResponse<UserLoginResponse>();
+            response.Data = new UserLoginResponse();
+            try
+            {
+                var result = await services.Login(request.Adapt<UserLoginDetailDto>());
+                if (result == false)
+                {
+                    response.Status = 400;
+                    response.State = ResponseStateEnum.FAILED;
+                    response.Message = "bad";
+                }
+                else
+                {
+                    response.Status = 200;
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Message = "ok";
+                }
+                response.Data.IsSuccess = result;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Status = 403;
+                response.State = ResponseStateEnum.FAILED;
+                response.Message = "badd";
+            }
+            return Ok(response);
         }
         [HttpGet]
         [Route("ChangePassword")]

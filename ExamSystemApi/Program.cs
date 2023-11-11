@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 
 //db context
-string connectionString = builder.Configuration.GetConnectionString("");
+string connectionString = builder.Configuration.GetConnectionString("ExamDataBase");
 builder.Services.AddDbContext<SystemDbContext>(options=>options.UseSqlServer(connectionString));
 
 //add di 

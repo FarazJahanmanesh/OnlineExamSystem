@@ -1,5 +1,7 @@
 ﻿using Domain.Contracts.Repository;
+using Domain.Dtos.UserDtos;
 using Microsoft.EntityFrameworkCore;
+using XAct;
 
 namespace Database.Repository.User
 {
@@ -37,6 +39,19 @@ namespace Database.Repository.User
         #endregion
 
         #region other methods
+        public async Task<bool> Login(UserLoginDetailDto dto)
+        {
+            var user = await dbContext.Users.AsNoTracking().FirstOrDefaultAsync(c=>c.UserName==dto.UserName&&c.Password==dto.Password);
+            if(user == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         public async Task UserExsist(int id)//username 
         {

@@ -1,5 +1,6 @@
 ﻿using Domain.Contracts.Repository;
 using Domain.Contracts.Services;
+using Domain.Dtos.UserDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,12 @@ namespace Application.Services
         #endregion
 
         #region other methods
+
+
+        public async Task<bool> Login(UserLoginDetailDto dto)
+        {
+            return await repository.Login(dto);
+        }
         public async Task ChangePassword()
         {
             await repository.ChangePassword();

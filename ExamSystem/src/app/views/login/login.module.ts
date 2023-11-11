@@ -18,6 +18,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
     exports: [
         LoginFormComponent,
     ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA,
+        NO_ERRORS_SCHEMA
+    ],
 })
 export class LoginModule { }
- 
