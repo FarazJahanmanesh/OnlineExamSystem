@@ -68,20 +68,6 @@ namespace Database.Repository.User
                 return true;
             }
         }
-
-
-        public async Task UserExsist(int id)//username 
-        {
-            var user = dbContext.Users.AsNoTracking().FirstOrDefaultAsync();
-            if (user == null)
-            {
-                //return false;
-            }
-            else
-            {
-                //return true;
-            }
-        }
         public async Task ChangePassword(string password,int id)
         {
             var user = (await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id))

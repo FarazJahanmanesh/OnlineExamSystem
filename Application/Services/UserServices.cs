@@ -63,6 +63,21 @@ namespace Application.Services
         {
             await repository.UserExsist(3);
         }
+
+        public Task ChangePassword(string password, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateUser(UpdateUserDetailDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteUser(int id)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
