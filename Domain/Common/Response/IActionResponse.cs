@@ -12,3 +12,4 @@ namespace Domain.Common.Response
         List<string> Errors { get; set; }
     }
 }
+ 

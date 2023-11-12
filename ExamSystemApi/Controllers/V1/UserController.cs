@@ -78,11 +78,11 @@ namespace ExamSystemApi.Controllers.V1
             await services.GetListOfUser();
             return Ok();
         }
-        [HttpGet]
+        [HttpPost]
         [Route("CreateUser")]
-        public async Task<IActionResult> CreateUser()
+        public async Task<IActionResult> CreateUser([FromBody]CreateUserRequest request)
         {
-            await services.CreateUser();
+            await services.CreateUser(request.Adapt<CreateUserDetailDto>());
             return Ok();
         }
         [HttpGet]

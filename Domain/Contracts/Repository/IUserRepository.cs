@@ -13,9 +13,9 @@ namespace Domain.Contracts.Repository
         public Task UserExsist(int id);
         public Task ChangePassword();
         public Task UpdateUser();
-        public Task GetUser();
-        public Task GetListOfUser();
-        public Task CreateUser();
+        public Task<GetUserDetailDto> GetUser(int id);
+        public Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take);
+        public Task CreateUser(CreateUserDetailDto dto);
         public Task DeleteUser();
     }
 }

@@ -13,6 +13,7 @@ namespace Database
         public SystemDbContext(DbContextOptions<SystemDbContext> options):base(options)
         {
         }
+        public DbSet<Academy> Academies { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Answer> Answers { get; set; }

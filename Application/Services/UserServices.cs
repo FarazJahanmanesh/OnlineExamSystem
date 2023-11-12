@@ -20,9 +20,9 @@ namespace Application.Services
         #endregion
 
         #region crud
-        public async Task CreateUser()
+        public async Task CreateUser(CreateUserDetailDto dto)
         {
-            await repository.CreateUser();
+            await repository.CreateUser(dto);
         }
 
         public async Task DeleteUser()
@@ -30,14 +30,14 @@ namespace Application.Services
             await repository.DeleteUser();
         }
 
-        public async Task GetListOfUser()
+        public async Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take)
         {
-            await repository.GetListOfUser();
+            return await repository.GetListOfUser(skip,take);
         }
 
-        public async Task GetUser()
+        public async Task<GetUserDetailDto> GetUser(int id)
         {
-            await repository.GetUser();
+            return await repository.GetUser(id);
         }
 
         public async Task UpdateUser()
