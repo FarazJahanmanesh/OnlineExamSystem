@@ -18,6 +18,8 @@ namespace Dependencies.Dependencies
             #region add Dependencies
             services.AddScoped< IUserServices , UserServices > ();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAcademyRepository, AcademyRepository>();
+            services.AddScoped<IAcademyServices, AcademyServices>();
             #endregion
         }
     }

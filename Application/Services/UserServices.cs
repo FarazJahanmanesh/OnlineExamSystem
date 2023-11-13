@@ -25,10 +25,6 @@ namespace Application.Services
             await repository.CreateUser(dto);
         }
 
-        public async Task DeleteUser()
-        {
-            await repository.DeleteUser();
-        }
 
         public async Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take)
         {
@@ -40,11 +36,14 @@ namespace Application.Services
             return await repository.GetUser(id);
         }
 
-        public async Task UpdateUser()
+        public async Task UpdateUser(UpdateUserDetailDto dto)
         {
-            await repository.UpdateUser();
+            await repository.UpdateUser(dto);
         }
-
+        public async Task DeleteUser(int id)
+        {
+            await repository.DeleteUser(id);
+        }
         #endregion
 
         #region other methods
@@ -54,30 +53,12 @@ namespace Application.Services
         {
             return await repository.Login(dto);
         }
-        public async Task ChangePassword()
+
+        public async Task ChangePassword(string password, int id)
         {
-            await repository.ChangePassword();
+            await repository.ChangePassword(password, id);
         }
 
-        public async Task UserExsist()
-        {
-            await repository.UserExsist(3);
-        }
-
-        public Task ChangePassword(string password, int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateUser(UpdateUserDetailDto dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteUser(int id)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }

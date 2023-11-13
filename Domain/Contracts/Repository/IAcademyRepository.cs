@@ -1,0 +1,19 @@
+﻿using Domain.Dtos.UserDtos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Contracts.Repository
+{
+    public interface IAcademyRepository
+    {
+        public  Task GetAllAcademies();
+        public Task GetAcademy();
+        public Task DeleteAcademy();
+        public Task AddAcademy();
+        public Task<bool> AcademiesLogin(UserLoginDetailDto dto);
+        public Task ChangeAcademyPassword(string password, int id);
+    }
+}

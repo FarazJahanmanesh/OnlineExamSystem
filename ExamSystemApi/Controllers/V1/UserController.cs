@@ -50,14 +50,14 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        [HttpGet]
+        [HttpPost]
         [Route("ChangePassword")]
         public async Task<IActionResult> ChangePassword()
         {
             await services.ChangePassword();
             return Ok();
         }
-        [HttpGet]
+        [HttpPost]
         [Route("UpdateUser")]
         public async Task<IActionResult> UpdateUser()
         {
@@ -85,11 +85,11 @@ namespace ExamSystemApi.Controllers.V1
             await services.CreateUser(request.Adapt<CreateUserDetailDto>());
             return Ok();
         }
-        [HttpGet]
+        [HttpPost]
         [Route("DeleteUser")]
-        public async Task<IActionResult> DeleteUser()
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            await services.DeleteUser();
+            await services.DeleteUser(id);
             return Ok();
         }
     }

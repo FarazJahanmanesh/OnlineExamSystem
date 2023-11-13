@@ -27,7 +27,7 @@ namespace Database.Repository.User
         }
         public async Task<GetUserDetailDto> GetUser(int id)
         {
-            return (await dbContext.Users.AsNoTracking()
+            return (await dbContext.Users.ProjectToType<GetUserDetailDto>().AsNoTracking()
                 .FirstOrDefaultAsync(i => i.Id == id))
                 .Adapt<GetUserDetailDto>();
         }

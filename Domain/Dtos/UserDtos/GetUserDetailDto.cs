@@ -10,6 +10,7 @@ namespace Domain.Dtos.UserDtos
 {
     public class GetUserDetailDto
     {
+        public int Id { get; set; }
         public string UserName { get; set; }//phone
         public string FirstName { get; set; }
         public string LastName { get; set; }
