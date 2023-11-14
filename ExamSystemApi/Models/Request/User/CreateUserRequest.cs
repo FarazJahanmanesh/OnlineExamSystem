@@ -1,6 +1,6 @@
 ﻿using Domain.Enums.User;
 
-namespace ExamSystemApi.Models.Request
+namespace ExamSystemApi.Models.Request.User
 {
     public class CreateUserRequest
     {

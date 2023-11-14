@@ -1,4 +1,4 @@
-﻿namespace ExamSystemApi.Models.Response
+﻿namespace ExamSystemApi.Models.Response.User
 {
     public class UserLoginResponse
     {

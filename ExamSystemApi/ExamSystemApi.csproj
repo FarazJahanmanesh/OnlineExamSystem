@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Dependencies\Dependencies.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Request\Academy\" />
+    <Folder Include="Models\Response\Academy\" />
+  </ItemGroup>
+
 </Project>

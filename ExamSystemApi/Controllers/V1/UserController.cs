@@ -2,7 +2,9 @@
 using Domain.Contracts.Services;
 using Domain.Dtos.UserDtos;
 using ExamSystemApi.Models.Request;
+using ExamSystemApi.Models.Request.User;
 using ExamSystemApi.Models.Response;
+using ExamSystemApi.Models.Response.User;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,30 +54,30 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("ChangePassword")]
-        public async Task<IActionResult> ChangePassword()
+        public async Task<IActionResult> ChangePassword(string password, int id)
         {
-            await services.ChangePassword();
+            await services.ChangePassword(password,id);
             return Ok();
         }
         [HttpPost]
         [Route("UpdateUser")]
-        public async Task<IActionResult> UpdateUser()
+        public async Task<IActionResult> UpdateUser(UpdateUserDetailDto dto)
         {
-            await services.UpdateUser();
+            await services.UpdateUser(dto);
             return Ok();
         }
         [HttpGet]
         [Route("GetUser")]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetUser(int id)
         {
-            await services.GetUser();
+            await services.GetUser(id);
             return Ok();
         }
         [HttpGet]
         [Route("GetListOfUser")]
-        public async Task<IActionResult> GetListOfUser()
+        public async Task<IActionResult> GetListOfUser(int skip,int take)
         {
-            await services.GetListOfUser();
+            await services.GetListOfUser(skip,take);
             return Ok();
         }
         [HttpPost]

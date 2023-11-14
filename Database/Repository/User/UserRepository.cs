@@ -58,7 +58,7 @@ namespace Database.Repository.User
         {
             var user = await dbContext.Users.AsNoTracking()
                 .Where(c=>c.IsActive==true)
-                .FirstOrDefaultAsync(c => c.UserName == dto.UserName && c.Password == dto.Password);
+                .FirstOrDefaultAsync(c => c.UserName == dto.UserName && c.Password.SHA1HashCode() == dto.Password);
             if (user == null)
             {
                 return false;
@@ -68,12 +68,12 @@ namespace Database.Repository.User
                 return true;
             }
         }
-        public async Task ChangePassword(string password,int id)
+        public async Task ChangeUserPassword(ChangeUserPasswordDetailDto dto)
         {
-            var user = (await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id))
+            var user = (await dbContext.Users.FirstOrDefaultAsync(i => i.Id == dto.Id))
                 .Adapt<UpdateUserDetailDto>();
 
-            user.Password = password.SHA1HashCode();
+            user.Password = dto.Password.SHA1HashCode();
             await SaveChange();
         }
         private async Task SaveChange()

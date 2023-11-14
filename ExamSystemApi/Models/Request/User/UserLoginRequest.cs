@@ -1,4 +1,4 @@
-﻿namespace ExamSystemApi.Models.Request
+﻿namespace ExamSystemApi.Models.Request.User
 {
     public class UserLoginRequest
     {
