@@ -53,17 +53,17 @@ namespace ExamSystemApi.Controllers.V1
             return Ok(response);
         }
         [HttpPost]
-        [Route("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(string password, int id)
+        [Route("ChangeUserPassword")]
+        public async Task<IActionResult> ChangeUserPassword(ChangeUserPasswordRequest request)
         {
-            await services.ChangePassword(password,id);
+            await services.ChangeUserPassword(request.Adapt<ChangeUserPasswordDetailDto>());
             return Ok();
         }
         [HttpPost]
         [Route("UpdateUser")]
-        public async Task<IActionResult> UpdateUser(UpdateUserDetailDto dto)
+        public async Task<IActionResult> UpdateUser(UpdateUserRequest request)
         {
-            await services.UpdateUser(dto);
+            await services.UpdateUser(request.Adapt<UpdateUserDetailDto>());
             return Ok();
         }
         [HttpGet]

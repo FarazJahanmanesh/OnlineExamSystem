@@ -1,4 +1,5 @@
-﻿using Domain.Dtos.UserDtos;
+﻿using Domain.Dtos.AcademyDtos;
+using Domain.Dtos.UserDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace Domain.Contracts.Repository
     public interface IAcademyRepository
     {
         public  Task GetAllAcademies();
-        public Task GetAcademy();
-        public Task DeleteAcademy();
+        public Task GetAcademy(int id);
+        public Task DeleteAcademy(int id);
         public Task AddAcademy();
-        public Task<bool> AcademiesLogin(UserLoginDetailDto dto);
+        public Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto);
         public Task ChangeAcademyPassword(string password, int id);
     }
 }

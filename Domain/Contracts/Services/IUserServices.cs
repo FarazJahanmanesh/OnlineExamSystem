@@ -10,7 +10,7 @@ namespace Domain.Contracts.Services
     public interface IUserServices
     {
         public Task<bool> Login(UserLoginDetailDto dto);
-        public Task ChangePassword(string password, int id);
+        public Task ChangeUserPassword(ChangeUserPasswordDetailDto dto);
         public Task UpdateUser(UpdateUserDetailDto dto);
         public Task<GetUserDetailDto> GetUser(int id);
         public Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take);

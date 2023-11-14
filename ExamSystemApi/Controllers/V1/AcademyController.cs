@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Contracts.Services;
+using Domain.Dtos.AcademyDtos;
+using ExamSystemApi.Models.Request.Academy;
+using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamSystemApi.Controllers.V1
@@ -8,10 +12,10 @@ namespace ExamSystemApi.Controllers.V1
     public class AcademyController : ControllerBase
     {
         #region ctor
-        //private readonly IAcademyServices 
-        public AcademyController()
+        private readonly IAcademyServices services;
+        public AcademyController(IAcademyServices services)
         {
-
+            this.services = services;
         }
         #endregion
         [HttpGet]
@@ -31,6 +35,7 @@ namespace ExamSystemApi.Controllers.V1
         [Route("CreateAcademy")]
         public async Task<IActionResult> CreateAcademy()
         {
+            await services.AddAcademy();
             return Ok();
         }
         [HttpPost]
@@ -47,8 +52,9 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("AcademiesLogin")]
-        public async Task<IActionResult> AcademiesLogin()
+        public async Task<IActionResult> AcademiesLogin([FromBody]AcademiesLoginRequest request)
         {
+            await services.AcademiesLogin(request.Adapt<AcademiesLoginDetailDto>());
             return Ok();
         }
     }
