@@ -16,6 +16,8 @@ namespace Dependencies.Dependencies
         public static void RegisterServices(this IServiceCollection services)
         {
             #region add Dependencies
+            services.AddScoped<IExamServices,ExamServices>();
+            services.AddScoped<IExamRepository,ExamRepository>();
             services.AddScoped< IUserServices , UserServices > ();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAcademyRepository, AcademyRepository>();

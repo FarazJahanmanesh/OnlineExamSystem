@@ -1,5 +1,6 @@
 ﻿using Domain.Contracts.Repository;
 using Domain.Contracts.Services;
+using Domain.Dtos.AcademyDtos;
 using Domain.Dtos.UserDtos;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace Application.Services
         {
 
         }
-        public async Task<bool> AcademiesLogin(UserLoginDetailDto dto)
+        public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
             return true;
         }

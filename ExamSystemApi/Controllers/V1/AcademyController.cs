@@ -54,8 +54,15 @@ namespace ExamSystemApi.Controllers.V1
         [Route("AcademiesLogin")]
         public async Task<IActionResult> AcademiesLogin([FromBody]AcademiesLoginRequest request)
         {
-            await services.AcademiesLogin(request.Adapt<AcademiesLoginDetailDto>());
-            return Ok();
+            var result = await services.AcademiesLogin(request.Adapt<AcademiesLoginDetailDto>());
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,11 +44,10 @@ namespace Database.Repository.User
 
             await SaveChange();
         }
-        public async Task<bool> AcademiesLogin(UserLoginDetailDto dto)
+        public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
             var user = await dbContext.Academies.AsNoTracking()
-                .Where(c => c.IsActive == true)
-                .FirstOrDefaultAsync(c => c.UserName == dto.UserName && c.Password == dto.Password);
+                .FirstOrDefaultAsync(c => c.IsActive == true &&  c.UserName == dto.UserName && c.Password == dto.Password);
             if (user == null)
             {
                 return false;
