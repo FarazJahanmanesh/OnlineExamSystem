@@ -38,7 +38,7 @@ namespace Application.Services
         }
         public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
-            return true;
+            return await _repository.AcademiesLogin(dto);
         }
         public async Task ChangeAcademyPassword(string password, int id)
         {

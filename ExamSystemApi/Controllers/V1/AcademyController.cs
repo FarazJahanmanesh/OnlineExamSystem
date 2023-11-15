@@ -12,10 +12,16 @@ namespace ExamSystemApi.Controllers.V1
     public class AcademyController : ControllerBase
     {
         #region ctor
-        private readonly IAcademyServices services;
-        public AcademyController(IAcademyServices services)
+        private readonly IExamServices examServices;
+        private readonly IUserServices userServices;
+        private readonly IAcademyServices academyServices;
+        public AcademyController(IAcademyServices academyServices,
+            IUserServices userServices,
+            IExamServices examServices)
         {
-            this.services = services;
+            this.userServices = userServices;
+            this.academyServices = academyServices;
+            this.examServices = examServices;
         }
         #endregion
         [HttpGet]
@@ -35,7 +41,7 @@ namespace ExamSystemApi.Controllers.V1
         [Route("CreateAcademy")]
         public async Task<IActionResult> CreateAcademy()
         {
-            await services.AddAcademy();
+            await academyServices.AddAcademy();
             return Ok();
         }
         [HttpPost]
@@ -50,14 +56,29 @@ namespace ExamSystemApi.Controllers.V1
         {
             return Ok();
         }
+
+        [HttpPost]
+        [Route("CreateNewExam")]
+        public async Task<IActionResult> CreateNewExam()
+        {
+            await examServices.CreateExam();
+            return Ok();
+        }
+        [HttpPost]
+        [Route("CreateNewUser")]
+        public async Task<IActionResult> CreateNewUser()
+        {
+            return Ok();
+        }
+
         [HttpPost]
         [Route("AcademiesLogin")]
         public async Task<IActionResult> AcademiesLogin([FromBody]AcademiesLoginRequest request)
         {
-            var result = await services.AcademiesLogin(request.Adapt<AcademiesLoginDetailDto>());
+            var result = await academyServices.AcademiesLogin(request.Adapt<AcademiesLoginDetailDto>());
             if (result)
             {
-                return Ok();
+                return Ok(result);
             }
             else
             {

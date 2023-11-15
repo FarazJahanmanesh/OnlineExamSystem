@@ -46,8 +46,8 @@ namespace Database.Repository.User
         }
         public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
-            var user = await dbContext.Academies.AsNoTracking()
-                .FirstOrDefaultAsync(c => c.IsActive == true &&  c.UserName == dto.UserName && c.Password == dto.Password);
+            var user = await dbContext.Academies.AsNoTracking().Where(c => c.IsActive == true)
+                .FirstOrDefaultAsync(c=>c.UserName == dto.UserName && c.Password == dto.Password);
             if (user == null)
             {
                 return false;

@@ -1,4 +1,5 @@
-﻿using Domain.Contracts.Services;
+﻿using Domain.Contracts.Repository;
+using Domain.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,14 @@ namespace Application.Services
 {
     public class ExamServices: IExamServices
     {
+        private readonly IExamRepository repository;
+        public ExamServices(IExamRepository repository)
+        {
+            this.repository = repository;
+        }
+        public async Task CreateExam()
+        {
+            await repository.CreateExam();
+        }
     }
 }

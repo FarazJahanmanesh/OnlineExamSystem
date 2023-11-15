@@ -8,5 +8,6 @@ namespace Domain.Contracts.Repository
 {
     public interface IExamRepository
     {
+        public Task CreateExam();
     }
 }

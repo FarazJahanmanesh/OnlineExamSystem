@@ -8,5 +8,6 @@ namespace Domain.Contracts.Services
 {
     public interface IExamServices
     {
+        public Task CreateExam();
     }
 }
