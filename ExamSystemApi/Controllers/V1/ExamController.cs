@@ -10,9 +10,11 @@ namespace ExamSystemApi.Controllers.V1
         {
             this.services= services;
         }
-        public IActionResult Index()
+        [HttpPost]
+        [Route("CreateEXam")]
+        public async Task<IActionResult> CreateEXam()
         {
-            return View();
+
         }
     }
 }

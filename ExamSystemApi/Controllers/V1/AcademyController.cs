@@ -64,12 +64,6 @@ namespace ExamSystemApi.Controllers.V1
             await examServices.CreateExam();
             return Ok();
         }
-        [HttpPost]
-        [Route("CreateNewUser")]
-        public async Task<IActionResult> CreateNewUser()
-        {
-            return Ok();
-        }
 
         [HttpPost]
         [Route("AcademiesLogin")]
