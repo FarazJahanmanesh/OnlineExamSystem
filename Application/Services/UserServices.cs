@@ -36,9 +36,9 @@ namespace Application.Services
             return await repository.GetUser(id);
         }
 
-        public async Task UpdateUser(UpdateUserDetailDto dto)
+        public async Task<GetUserDetailDto> UpdateUser(UpdateUserDetailDto dto)
         {
-            await repository.UpdateUser(dto);
+            return await repository.UpdateUser(dto);
         }
         public async Task DeleteUser(int id)
         {

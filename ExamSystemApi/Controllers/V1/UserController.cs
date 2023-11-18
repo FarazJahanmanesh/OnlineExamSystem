@@ -63,22 +63,101 @@ namespace ExamSystemApi.Controllers.V1
         [Route("UpdateUser")]
         public async Task<IActionResult> UpdateUser(UpdateUserRequest request)
         {
-            await services.UpdateUser(request.Adapt<UpdateUserDetailDto>());
-            return Ok();
+            var response = new ActionResponse<UpdateUserResponse>();
+            response.Data = new UpdateUserResponse();
+            try
+            {
+                var newUser = await services.UpdateUser(request.Adapt<UpdateUserDetailDto>());
+                if (newUser != null)
+                {
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Status = 200;
+                    response.Message = "ok";
+                    response.Data = newUser.Adapt<UpdateUserResponse>();
+                    return Ok(response);
+                }
+                else
+                {
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Status = 404;
+                    response.Message = "bad";
+                    return Ok(response);
+                }
+            }
+            catch(Exception ex) 
+            {
+                response.State = ResponseStateEnum.SUCCESS;
+                response.Status = 503;
+                response.Message = "bad";
+            }
+            return Ok(response);
         }
         [HttpGet]
         [Route("GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            await services.GetUser(id);
-            return Ok();
+            var response = new ActionResponse<GetUserResponse>();
+            response.Data = new GetUserResponse();
+            try
+            {
+                var user = await services.GetUser(id);
+                if (user != null)
+                {
+                    response.Data = user.Adapt<GetUserResponse>();
+                    response.Status=200;
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Message = "ok";
+
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Status = 404;
+                    response.State = ResponseStateEnum.FAILED;
+                    response.Message = "bad";
+                    return Ok(response);
+                }
+            }
+            catch(Exception ex)
+            {
+                response.Status = 503;
+                response.State = ResponseStateEnum.FAILED;
+                response.Message = "bad";
+            }
+            return Ok(response);
         }
         [HttpGet]
         [Route("GetListOfUser")]
         public async Task<IActionResult> GetListOfUser(int skip,int take)
         {
-            await services.GetListOfUser(skip,take);
-            return Ok();
+            var response = new ActionResponse<List<GetUserResponse>>();
+            response.Data = new List<GetUserResponse>();
+            try
+            {
+                var users = await services.GetListOfUser(skip, take);
+                if(users != null)
+                {
+                    response.Data = users.Adapt<List<GetUserResponse>>();
+                    response.Status=200;
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Message = "ok";
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Status = 404;
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Message = "bad";
+                    return Ok(response);
+                }
+            }
+            catch(Exception ex)
+            {
+                response.Status = 503;
+                response.State = ResponseStateEnum.SUCCESS;
+                response.Message = "ok";
+            }
+            return Ok(response);
         }
         [HttpPost]
         [Route("CreateUser")]

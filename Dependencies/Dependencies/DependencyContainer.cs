@@ -1,4 +1,6 @@
 ﻿using Application.Services;
+using Database.Repository.Academy;
+using Database.Repository.Exam;
 using Database.Repository.User;
 using Domain.Contracts.Repository;
 using Domain.Contracts.Services;

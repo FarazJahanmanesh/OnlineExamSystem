@@ -12,16 +12,10 @@ namespace ExamSystemApi.Controllers.V1
     public class AcademyController : ControllerBase
     {
         #region ctor
-        private readonly IExamServices examServices;
-        private readonly IUserServices userServices;
         private readonly IAcademyServices academyServices;
-        public AcademyController(IAcademyServices academyServices,
-            IUserServices userServices,
-            IExamServices examServices)
+        public AcademyController(IAcademyServices academyServices)
         {
-            this.userServices = userServices;
             this.academyServices = academyServices;
-            this.examServices = examServices;
         }
         #endregion
         [HttpGet]
@@ -54,14 +48,6 @@ namespace ExamSystemApi.Controllers.V1
         [Route("UpdateAcademy")]
         public async Task<IActionResult> UpdateAcademy()
         {
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route("CreateNewExam")]
-        public async Task<IActionResult> CreateNewExam()
-        {
-            await examServices.CreateExam();
             return Ok();
         }
 

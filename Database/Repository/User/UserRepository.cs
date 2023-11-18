@@ -1,10 +1,12 @@
 ﻿using Application.Helpers;
 using Domain.Contracts.Repository;
+using Domain.Dtos.AcademyDtos;
 using Domain.Dtos.UserDtos;
 using Domain.Entities;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using XAct;
+using XAct.Users;
 
 namespace Database.Repository.User
 {
@@ -19,17 +21,23 @@ namespace Database.Repository.User
         #endregion
 
         #region crud
-        public async Task UpdateUser(UpdateUserDetailDto dto)
+        public async Task<GetUserDetailDto> UpdateUser(UpdateUserDetailDto dto)
         {
-            var existingUser = await dbContext.Users.FirstOrDefaultAsync(i => i.Id == dto.Id);
+            var existingUser = await dbContext.Users.ProjectToType<UpdateUserDetailDto>()
+                .FirstOrDefaultAsync(i => i.Id == dto.Id);
+            if (existingUser == null)
+            {
+                return null;
+            }
             existingUser = dto.Adapt(existingUser);
             await SaveChange();
+            return existingUser.Adapt<GetUserDetailDto>();
         }
         public async Task<GetUserDetailDto> GetUser(int id)
         {
-            return (await dbContext.Users.ProjectToType<GetUserDetailDto>().AsNoTracking()
-                .FirstOrDefaultAsync(i => i.Id == id))
-                .Adapt<GetUserDetailDto>();
+            return await dbContext.Users.AsNoTracking()
+                .ProjectToType<GetUserDetailDto>()
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
         public async Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take)
         {
@@ -45,10 +53,12 @@ namespace Database.Repository.User
         }
         public async Task DeleteUser(int id)
         {
-            var  user = (await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id))
-                .Adapt<GetUserDetailDto>();
-
-            user.IsActive = false;
+            var  user = await dbContext.Users
+                .FirstOrDefaultAsync(i => i.IsActive==true && i.Id == id);
+            if(user != null)
+            {
+                user.IsActive = false;
+            }
             await SaveChange();
         }
         #endregion
@@ -57,8 +67,9 @@ namespace Database.Repository.User
         public async Task<bool> Login(UserLoginDetailDto dto)
         {
             var user = await dbContext.Users.AsNoTracking()
+                .ProjectToType<UserLoginDetailDto>()
                 .Where(c=>c.IsActive==true)
-                .FirstOrDefaultAsync(c => c.UserName == dto.UserName && c.Password.SHA1HashCode() == dto.Password);
+                .FirstOrDefaultAsync(c => c.UserName == dto.UserName && c.Password == dto.Password);
             if (user == null)
             {
                 return false;
@@ -70,10 +81,12 @@ namespace Database.Repository.User
         }
         public async Task ChangeUserPassword(ChangeUserPasswordDetailDto dto)
         {
-            var user = (await dbContext.Users.FirstOrDefaultAsync(i => i.Id == dto.Id))
-                .Adapt<UpdateUserDetailDto>();
-
-            user.Password = dto.Password.SHA1HashCode();
+            var user = await dbContext.Users
+                .FirstOrDefaultAsync(i => i.IsActive==true&&i.Id == dto.Id);
+            if( user != null )
+            {
+                user.Password = dto.Password.SHA1HashCode();
+            }
             await SaveChange();
         }
         private async Task SaveChange()
@@ -83,3 +96,4 @@ namespace Database.Repository.User
         #endregion
     }
 }
+

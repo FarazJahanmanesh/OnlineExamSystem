@@ -1,16 +1,15 @@
 ﻿using Domain.Contracts.Repository;
 using Domain.Entities;
 using Domain.Enums.Exam;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Repository.User
+namespace Database.Repository.Exam
 {
-    public class ExamRepository: IExamRepository
+    public class ExamRepository : IExamRepository
     {
         private readonly SystemDbContext dbContext;
         public ExamRepository(SystemDbContext dbContext)
@@ -19,52 +18,46 @@ namespace Database.Repository.User
         }
         public async Task CreateExam()
         {
-            await dbContext.AddAsync(new Exam 
-            { 
-                AcademyId=1,
-                IsActice=true,
-                Price=20000,
-                FinallScore=100,
-                IsDelete=false,
-                Questions= new List<Question>
+            await dbContext.AddAsync(new Domain.Entities.Exam
+            {
+                AcademyId = 1,
+                IsActice = true,
+                Price = 20000,
+                FinallScore = 100,
+                Questions = new List<Question>
                     {
-                        new Question 
-                        { 
+                        new Question
+                        {
                             ExamType = ExamTypeEnum.Testi,
                             Score=100,
                             Content="test1?",
-                            IsDelete=false,
                             ExamId=1,
                             Choices = new List<QuestionChoice>
                             {
                                 new QuestionChoice
                                 {
                                     QuestionId = 1,
-                                    IsDelete = false,
                                     Content="faraz",
                                     IsTrue=true,
                                 },
                                 new QuestionChoice
                                 {
                                     QuestionId = 1,
-                                    IsDelete = false,
                                     Content="ehsan",
                                     IsTrue=false,
                                 },
                                  new QuestionChoice
                                 {
                                     QuestionId = 1,
-                                    IsDelete = false,
                                     Content="mahan",
                                     IsTrue=false,
                                 }
                             },
-                            Answers= new List<Answer>   
+                            Answers= new List<Answer>
                             {
                                 new Answer
                                 {
                                     IsTrue=true,
-                                    IsDelete=false,
                                     QuestionChoiceId=1,
                                     QuestionId=1,
                                     AnswerContent="faraz",
