@@ -40,8 +40,9 @@ namespace Application.Services
         {
             return await _repository.AcademiesLogin(dto);
         }
-        public async Task ChangeAcademyPassword(string password, int id)
+        public async Task<bool> ChangeAcademyPassword(ChangeAcademyPasswordDetailDto dto)
         {
+            return await _repository.ChangeAcademyPassword(dto);
         }
     }
 }

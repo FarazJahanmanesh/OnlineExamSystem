@@ -15,6 +15,6 @@ namespace Domain.Contracts.Repository
         public Task DeleteAcademy(int id);
         public Task AddAcademy();
         public Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto);
-        public Task ChangeAcademyPassword(string password, int id);
+        public Task<bool> ChangeAcademyPassword(ChangeAcademyPasswordDetailDto dto);
     }
 }
