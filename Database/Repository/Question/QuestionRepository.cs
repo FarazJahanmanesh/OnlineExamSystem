@@ -13,5 +13,25 @@ namespace Database.Repository.Question
         {
             this.dbContext = dbContext;
         }
+        public async Task GetQuestion()
+        {
+
+        }
+        public async Task GetQuestions()
+        {
+
+        }
+        public async Task DeleteQuestion()
+        {
+
+        }
+        public async Task UpdateQuestion()
+        {
+
+        }
+        public async Task AddQuestion()
+        {
+
+        }
     }
 }

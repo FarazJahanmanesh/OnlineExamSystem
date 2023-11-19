@@ -13,5 +13,25 @@ namespace Database.Repository.QuestionChoice
         {
             this.dbContext = dbContext;
         }
+        public async Task GetAllQuestionChoice()
+        {
+
+        }
+        public async Task GetQuestionChoice()
+        {
+
+        }
+        public async Task AddQuestionChoice()
+        {
+
+        }
+        public async Task UpdateQuestionChoice()
+        {
+
+        }
+        public async Task DeleteQuestionChoice()
+        {
+
+        }
     }
 }

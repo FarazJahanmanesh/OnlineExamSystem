@@ -13,6 +13,25 @@ namespace Database.Repository.Answer
         {
             this.dbContext= dbContext;
         }
+        public async Task GetAllAnswer()
+        {
 
+        }
+        public async Task GetAnswer()
+        {
+
+        }
+        public async Task UpdateAnswer()
+        {
+
+        }
+        public async Task DeleteAnswer()
+        {
+
+        }
+        public async Task AddAnswer()
+        {
+
+        }
     }
 }
