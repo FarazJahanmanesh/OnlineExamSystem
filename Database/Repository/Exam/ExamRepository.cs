@@ -1,6 +1,8 @@
 ﻿using Domain.Contracts.Repository;
 using Domain.Entities;
 using Domain.Enums.Exam;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,55 +20,42 @@ namespace Database.Repository.Exam
         }
         public async Task CreateExam()
         {
-            await dbContext.AddAsync(new Domain.Entities.Exam
+            await dbContext.Exams.AddAsync(new Domain.Entities.Exam
             {
                 AcademyId = 1,
                 IsActice = true,
                 Price = 20000,
                 FinallScore = 100,
-                Questions = new List<Question>
-                    {
-                        new Question
-                        {
-                            ExamType = ExamTypeEnum.Testi,
-                            Score=100,
-                            Content="test1?",
-                            ExamId=1,
-                            Choices = new List<QuestionChoice>
-                            {
-                                new QuestionChoice
-                                {
-                                    QuestionId = 1,
-                                    Content="faraz",
-                                    IsTrue=true,
-                                },
-                                new QuestionChoice
-                                {
-                                    QuestionId = 1,
-                                    Content="ehsan",
-                                    IsTrue=false,
-                                },
-                                 new QuestionChoice
-                                {
-                                    QuestionId = 1,
-                                    Content="mahan",
-                                    IsTrue=false,
-                                }
-                            },
-                            Answers= new List<Answer>
-                            {
-                                new Answer
-                                {
-                                    IsTrue=true,
-                                    QuestionChoiceId=1,
-                                    QuestionId=1,
-                                    AnswerContent="faraz",
-                                }
-                            }
-                        },
-                    }
             });
             await SaveChanges();
+        }
+        public async Task UpdateExam()
+        {
+            var exam = await dbContext.Exams.FirstOrDefaultAsync();
+            if (exam != null)
+            {
+                //exam = dto.Adapt(exam);
+                //await SaveChanges();
+            }
+        }
+        public async Task DeleteExam()
+        {
+            var exam = await dbContext.Exams.FirstOrDefaultAsync();
+            if (exam != null)
+            {
+                //exam.IsActive = false;
+                //await SaveChanges();
+            }
+        }
+        public async Task ShowExams()
+        {
+            var exams = await dbContext.Exams.AsNoTracking().ProjectToType<object>().Skip(0).Take(5).ToListAsync();
+            //return exams; 
+        }
+        public async Task ShowExam()
+        {
+            var exam = await dbContext.Exams.AsNoTracking().ProjectToType<object>().FirstOrDefaultAsync();
+            //return exam;
         }
         private async Task SaveChanges()
         {
