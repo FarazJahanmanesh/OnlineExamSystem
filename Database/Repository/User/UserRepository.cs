@@ -23,7 +23,7 @@ namespace Database.Repository.User
         #region crud
         public async Task<GetUserDetailDto> UpdateUser(UpdateUserDetailDto dto)
         {
-            var existingUser = await dbContext.Users.ProjectToType<UpdateUserDetailDto>()
+            var existingUser = await dbContext.Users
                 .FirstOrDefaultAsync(i => i.Id == dto.Id);
             if (existingUser == null)
             {
@@ -68,26 +68,24 @@ namespace Database.Repository.User
         {
             var user = await dbContext.Users.AsNoTracking()
                 .ProjectToType<UserLoginDetailDto>()
-                .Where(c=>c.IsActive==true)
-                .FirstOrDefaultAsync(c => c.UserName == dto.UserName && c.Password == dto.Password);
+                .FirstOrDefaultAsync(c => c.IsActive == true && c.UserName == dto.UserName && c.Password == dto.Password);
             if (user == null)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
-        public async Task ChangeUserPassword(ChangeUserPasswordDetailDto dto)
+        public async Task<bool> ChangeUserPassword(ChangeUserPasswordDetailDto dto)
         {
             var user = await dbContext.Users
                 .FirstOrDefaultAsync(i => i.IsActive==true&&i.Id == dto.Id);
             if( user != null )
             {
-                user.Password = dto.Password.SHA1HashCode();
+                user = dto.Adapt(user);
+                await SaveChange();
+                return true;
             }
-            await SaveChange();
+            return false;
         }
         private async Task SaveChange()
         {

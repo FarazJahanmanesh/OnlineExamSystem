@@ -20,31 +20,45 @@ namespace Database.Repository.Academy
             this.dbContext = dbContext;
         }
         #endregion
-        public async Task GetAllAcademies()
+        public async Task<List<GetAcademyDetailDto>> GetAllAcademies()
         {
-            await dbContext.Academies.AsNoTracking().ToListAsync();
+            return await dbContext.Academies.AsNoTracking().ProjectToType<GetAcademyDetailDto>().ToListAsync();
         }
-        public async Task GetAcademy(int id)
+        public async Task<GetAcademyDetailDto> GetAcademy(int id)
         {
-            await dbContext.Academies.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Academies.AsNoTracking().ProjectToType<GetAcademyDetailDto>().FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task DeleteAcademy(int id)
+        public async Task<bool> DeleteAcademy(int id)
         {
-            await dbContext.Academies.FirstOrDefaultAsync(c => c.Id == id);
-            await SaveChange();
+            var academy = await dbContext.Academies.FirstOrDefaultAsync(c => c.IsActive==true&&c.Id == id);
+            if(academy != null)
+            {
+                academy.IsActive = false;
+                await SaveChange();
+                return true;
+            }
+            return false;
         }
-        public async Task UpdateAcademy(UpdateAcademyDetailDto dto)
+        public async Task<bool> UpdateAcademy(UpdateAcademyDetailDto dto)
         {
             var academy = await dbContext.Academies.FirstOrDefaultAsync(c => c.IsActive == true );
             if (academy != null)
             {
+                academy = dto.Adapt(academy);
+                await SaveChange();
+                return true;
             }
-            await SaveChange();
+            return false;
         }
-        public async Task AddAcademy()
+        public async Task<bool> AddAcademy(CreateAcademyDetailDto dto)
         {
-
-            await SaveChange();
+            if ( await AcademyExist(dto.UserName))
+            {
+                await dbContext.Academies.AddAsync(dto.Adapt<Domain.Entities.Academy>());
+                await SaveChange();
+                return true;
+            }
+            return false;
         }
         public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
@@ -66,7 +80,7 @@ namespace Database.Repository.Academy
             var academy = await dbContext.Academies.FirstOrDefaultAsync(c => c.IsActive == true && c.Id == dto.Id && c.Password == dto.Password);
             if (academy != null)
             {
-                academy.Password = dto.Password;
+                academy = dto.Adapt(academy);
                 await SaveChange();
                 return true;
             }

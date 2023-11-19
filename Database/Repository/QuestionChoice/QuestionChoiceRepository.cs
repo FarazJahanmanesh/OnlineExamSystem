@@ -33,5 +33,9 @@ namespace Database.Repository.QuestionChoice
         {
 
         }
+        private async Task SaveChanges()
+        {
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

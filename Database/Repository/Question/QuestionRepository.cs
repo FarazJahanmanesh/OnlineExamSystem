@@ -31,7 +31,11 @@ namespace Database.Repository.Question
         }
         public async Task AddQuestion()
         {
-
+            await dbContext.Questions.AddAsync()
+        }
+        private async Task SaveChanges()
+        {
+            await dbContext.SaveChangesAsync();
         }
     }
 }
