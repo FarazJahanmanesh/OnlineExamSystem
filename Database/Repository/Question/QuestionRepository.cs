@@ -11,33 +11,34 @@ using XAct;
 
 namespace Database.Repository.Question
 {
-    public class QuestionRepository: IQuestionRepository
+    public class QuestionRepository : IQuestionRepository
     {
         private readonly SystemDbContext dbContext;
         public QuestionRepository(SystemDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
-        public async Task<GetQuestionsDetailDto> GetQuestion()
+        public async Task<GetQuestionsDetailDto> GetQuestion(int id)
         {
             return await dbContext.Questions.AsNoTracking()
                 .ProjectToType<GetQuestionsDetailDto>()
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(c => c.IsActive == true && c.Id == id);
         }
-        public async Task<List<GetQuestionsDetailDto>> GetQuestions()
+        public async Task<List<GetQuestionsDetailDto>> GetQuestions(int skip, int take)
         {
             return await dbContext.Questions.AsNoTracking()
                 .ProjectToType<GetQuestionsDetailDto>()
-                .Skip(0)
-                .Take(5)
+                .Where(c => c.IsActive == true)
+                .Skip(skip)
+                .Take(take)
                 .ToListAsync();
         }
         public async Task<bool> DeleteQuestion(DeleteQuestionDetailDto dto)
         {
-            var question = await dbContext.Questions.FirstOrDefaultAsync();
+            var question = await dbContext.Questions.FirstOrDefaultAsync(c => c.Id == dto.Id);
             if (question != null)
             {
-                question=dto.Adapt(question);
+                question = dto.Adapt(question);
                 await SaveChanges();
                 return true;
             }
@@ -45,7 +46,7 @@ namespace Database.Repository.Question
         }
         public async Task<bool> UpdateQuestion(UpdateQuestionDetailDto dto)
         {
-            var question = await dbContext.Questions.FirstOrDefaultAsync();
+            var question = await dbContext.Questions.FirstOrDefaultAsync(c=>c.Id==dto.Id);
             if (question != null)
             {
                 question = dto.Adapt(question);

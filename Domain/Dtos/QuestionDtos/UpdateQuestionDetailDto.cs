@@ -8,5 +8,6 @@ namespace Domain.Dtos.QuestionDtos
 {
     public class UpdateQuestionDetailDto
     {
+        public int Id { get; set; }
     }
 }

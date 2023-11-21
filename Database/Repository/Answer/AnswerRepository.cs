@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using Domain.Contracts.Repository;
+using Domain.Dtos.AnswerDtos;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,20 +11,24 @@ using XAct;
 
 namespace Database.Repository.Answer
 {
-    public class AnswerRepository
+    public class AnswerRepository: IAnswerRepository
     {
         private readonly SystemDbContext dbContext;
         public AnswerRepository(SystemDbContext dbContext)
         {
             this.dbContext= dbContext;
         }
-        public async Task GetAllAnswer()
+        public async Task<List<GetAllAnswerDetailDto>> GetAllAnswer()
         {
-            //await dbContext.Answers.AsNoTracking().ProjectToType<>().ToListAsync();
+            return await dbContext.Answers.AsNoTracking()
+                .ProjectToType<GetAllAnswerDetailDto>()
+                .ToListAsync();
         }
-        public async Task GetAnswer()
+        public async Task<GetAllAnswerDetailDto> GetAnswer()
         {
-            //await dbContext.Answers.AsNoTracking().ProjectToType<>().FirstOrDefaultAsync();
+            return await dbContext.Answers.AsNoTracking()
+                .ProjectToType<GetAllAnswerDetailDto>()
+                .FirstOrDefaultAsync();
         }
         public async Task UpdateAnswer()
         {
@@ -32,9 +38,10 @@ namespace Database.Repository.Answer
         {
 
         }
-        public async Task AddAnswer()
+        public async Task AddAnswer(AddAnswerDetailDto dto)
         {
-
+            await dbContext.Answers.AddAsync(dto.Adapt<Domain.Entities.Answer>());
+            await SaveChanges();
         }
         private async Task SaveChanges()
         {

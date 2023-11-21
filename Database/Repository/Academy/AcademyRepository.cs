@@ -22,11 +22,15 @@ namespace Database.Repository.Academy
         #endregion
         public async Task<List<GetAcademyDetailDto>> GetAllAcademies()
         {
-            return await dbContext.Academies.AsNoTracking().ProjectToType<GetAcademyDetailDto>().ToListAsync();
+            return await dbContext.Academies.AsNoTracking()
+                .ProjectToType<GetAcademyDetailDto>()
+                .ToListAsync();
         }
         public async Task<GetAcademyDetailDto> GetAcademy(int id)
         {
-            return await dbContext.Academies.AsNoTracking().ProjectToType<GetAcademyDetailDto>().FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Academies.AsNoTracking()
+                .ProjectToType<GetAcademyDetailDto>()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<bool> DeleteAcademy(int id)
         {
@@ -52,7 +56,7 @@ namespace Database.Repository.Academy
         }
         public async Task<bool> AddAcademy(CreateAcademyDetailDto dto)
         {
-            if ( await AcademyExist(dto.UserName))
+            if (await AcademyExist(dto.UserName))
             {
                 await dbContext.Academies.AddAsync(dto.Adapt<Domain.Entities.Academy>());
                 await SaveChange();
@@ -62,7 +66,6 @@ namespace Database.Repository.Academy
         }
         public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
-            await AcademyExist("jahan");
             var user = await dbContext.Academies.AsNoTracking()
                 .ProjectToType<AcademiesLoginDetailDto>()
                 .FirstOrDefaultAsync(c => c.IsActive==true && c.UserName == dto.UserName && c.Password == dto.Password);

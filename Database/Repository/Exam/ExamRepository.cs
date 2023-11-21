@@ -1,4 +1,5 @@
 ﻿using Domain.Contracts.Repository;
+using Domain.Dtos.ExamDtos;
 using Domain.Entities;
 using Domain.Enums.Exam;
 using Mapster;
@@ -18,44 +19,46 @@ namespace Database.Repository.Exam
         {
             this.dbContext = dbContext;
         }
-        public async Task CreateExam()
+        public async Task CreateExam(CreateExamDetailDto dto)
         {
-            await dbContext.Exams.AddAsync(new Domain.Entities.Exam
-            {
-                AcademyId = 1,
-                IsActice = true,
-                Price = 20000,
-                FinallScore = 100,
-            });
+            await dbContext.Exams.AddAsync(dto.Adapt<Domain.Entities.Exam>());
             await SaveChanges();
         }
-        public async Task UpdateExam()
+        public async Task<bool> UpdateExam(UpdateExamDetailDto dto)
         {
-            var exam = await dbContext.Exams.FirstOrDefaultAsync();
+            var exam = await dbContext.Exams.FirstOrDefaultAsync(c=>c.IsActice==true);
             if (exam != null)
             {
-                //exam = dto.Adapt(exam);
-                //await SaveChanges();
+                exam = dto.Adapt(exam);
+                await SaveChanges();
+                return true;
             }
+            return false;
         }
-        public async Task DeleteExam()
+        public async Task<bool> DeleteExam(DeleteExamDetailDto dto)
         {
-            var exam = await dbContext.Exams.FirstOrDefaultAsync();
+            var exam = await dbContext.Exams.FirstOrDefaultAsync(c=>c.IsActice==true&&c.Id==dto.Id);
             if (exam != null)
             {
-                //exam.IsActive = false;
-                //await SaveChanges();
+                exam.IsActice = false;
+                await SaveChanges();
+                return true;
             }
+            return false;
         }
-        public async Task ShowExams()
+        public async Task<List<ShowExamsDetailDto>> ShowExams()
         {
-            var exams = await dbContext.Exams.AsNoTracking().ProjectToType<object>().Skip(0).Take(5).ToListAsync();
-            //return exams; 
+            return await dbContext.Exams.AsNoTracking()
+                .ProjectToType<ShowExamsDetailDto>()
+                .Skip(0)
+                .Take(5)
+                .ToListAsync();
         }
-        public async Task ShowExam()
+        public async Task<ShowExamsDetailDto> ShowExam()
         {
-            var exam = await dbContext.Exams.AsNoTracking().ProjectToType<object>().FirstOrDefaultAsync();
-            //return exam;
+            return await dbContext.Exams.AsNoTracking()
+                .ProjectToType<ShowExamsDetailDto>()
+                .FirstOrDefaultAsync();
         }
         private async Task SaveChanges()
         {

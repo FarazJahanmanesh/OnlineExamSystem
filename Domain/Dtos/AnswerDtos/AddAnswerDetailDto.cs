@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Dtos.QuestionDtos
+namespace Domain.Dtos.AnswerDtos
 {
-    public class DeleteQuestionDetailDto
+    public class AddAnswerDetailDto
     {
-        public int Id { get; set; }
     }
 }
