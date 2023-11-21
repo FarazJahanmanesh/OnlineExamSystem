@@ -18,11 +18,11 @@ namespace Database.Repository.Answer
         }
         public async Task GetAllAnswer()
         {
-            await dbContext.Answers.AsNoTracking().ProjectToType<>().ToListAsync();
+            //await dbContext.Answers.AsNoTracking().ProjectToType<>().ToListAsync();
         }
         public async Task GetAnswer()
         {
-            await dbContext.Answers.AsNoTracking().ProjectToType<>().FirstOrDefaultAsync();
+            //await dbContext.Answers.AsNoTracking().ProjectToType<>().FirstOrDefaultAsync();
         }
         public async Task UpdateAnswer()
         {

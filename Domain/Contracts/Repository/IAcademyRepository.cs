@@ -10,10 +10,10 @@ namespace Domain.Contracts.Repository
 {
     public interface IAcademyRepository
     {
-        public  Task GetAllAcademies();
-        public Task GetAcademy(int id);
-        public Task DeleteAcademy(int id);
-        public Task AddAcademy();
+        public Task<List<GetAcademyDetailDto>> GetAllAcademies();
+        public Task<GetAcademyDetailDto> GetAcademy(int id);
+        public Task<bool> DeleteAcademy(int id);
+        public Task<bool> AddAcademy(CreateAcademyDetailDto dto);
         public Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto);
         public Task<bool> ChangeAcademyPassword(ChangeAcademyPasswordDetailDto dto);
     }

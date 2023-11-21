@@ -54,9 +54,9 @@ namespace Application.Services
             return await repository.Login(dto);
         }
 
-        public async Task ChangeUserPassword(ChangeUserPasswordDetailDto dto)
+        public async Task<bool> ChangeUserPassword(ChangeUserPasswordDetailDto dto)
         {
-            await repository.ChangeUserPassword(dto);
+            return await repository.ChangeUserPassword(dto);
         }
 
         #endregion

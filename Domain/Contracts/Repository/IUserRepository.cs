@@ -10,7 +10,7 @@ namespace Domain.Contracts.Repository
     public interface IUserRepository
     {
         public Task<bool> Login(UserLoginDetailDto dto);
-        public Task ChangeUserPassword(ChangeUserPasswordDetailDto dto);
+        public Task<bool> ChangeUserPassword(ChangeUserPasswordDetailDto dto);
         public Task<GetUserDetailDto> UpdateUser(UpdateUserDetailDto dto);
         public Task<GetUserDetailDto> GetUser(int id);
         public Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take);

@@ -1,4 +1,5 @@
-﻿using Domain.Dtos.QuestionDtos;
+﻿using Domain.Contracts.Repository;
+using Domain.Dtos.QuestionDtos;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System;
