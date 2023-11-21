@@ -24,7 +24,7 @@ namespace Database.Repository.User
         public async Task<GetUserDetailDto> UpdateUser(UpdateUserDetailDto dto)
         {
             var existingUser = await dbContext.Users
-                .FirstOrDefaultAsync(i => i.Id == dto.Id);
+                .FirstOrDefaultAsync(i => i.IsActive==true && i.Id == dto.Id);
             if (existingUser == null)
             {
                 return null;
@@ -37,11 +37,12 @@ namespace Database.Repository.User
         {
             return await dbContext.Users.AsNoTracking()
                 .ProjectToType<GetUserDetailDto>()
-                .FirstOrDefaultAsync(i => i.Id == id);
+                .FirstOrDefaultAsync(i => i.IsActive==true&&i.Id == id);
         }
         public async Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take)
         {
             return await dbContext.Users.ProjectToType<GetUserDetailDto>()
+                .Where(c=>c.IsActive==true)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();

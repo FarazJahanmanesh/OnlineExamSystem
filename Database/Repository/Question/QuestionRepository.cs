@@ -22,20 +22,19 @@ namespace Database.Repository.Question
         {
             return await dbContext.Questions.AsNoTracking()
                 .ProjectToType<GetQuestionsDetailDto>()
-                .FirstOrDefaultAsync(c => c.IsActive == true && c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<List<GetQuestionsDetailDto>> GetQuestions(int skip, int take)
         {
             return await dbContext.Questions.AsNoTracking()
                 .ProjectToType<GetQuestionsDetailDto>()
-                .Where(c => c.IsActive == true)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
         }
         public async Task<bool> DeleteQuestion(DeleteQuestionDetailDto dto)
         {
-            var question = await dbContext.Questions.FirstOrDefaultAsync(c => c.Id == dto.Id);
+            var question = await dbContext.Questions.FirstOrDefaultAsync(c =>c.Id == dto.Id);
             if (question != null)
             {
                 question = dto.Adapt(question);
