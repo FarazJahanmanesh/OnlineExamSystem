@@ -18,31 +18,42 @@ namespace Application.Services
         {
             _repository = repository;
         }
-        #endregion
 
-        public async Task GetAllAcademies()
-        {
-
-        }
-        public async Task GetAcademy()
-        {
-
-        }
-        public async Task DeleteAcademy()
-        {
-
-        }
-        public async Task AddAcademy()
-        {
-
-        }
         public async Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto)
         {
-            return await _repository.AcademiesLogin(dto);
+             return await _repository.AcademiesLogin(dto);
         }
+
+        public async  Task<bool> AddAcademy(CreateAcademyDetailDto dto)
+        {
+              return await _repository.AddAcademy(dto);
+        }
+
         public async Task<bool> ChangeAcademyPassword(ChangeAcademyPasswordDetailDto dto)
         {
-            return await _repository.ChangeAcademyPassword(dto);
+            return await ChangeAcademyPassword(dto);
         }
+
+        public async Task<bool> DeleteAcademy(int id)
+        {
+            return await _repository.DeleteAcademy(id);
+        }
+
+        public async Task<GetAcademyDetailDto> GetAcademy(int id)
+        {
+            return await _repository.GetAcademy(id);
+        }
+
+        public async Task<List<GetAcademyDetailDto>> GetAllAcademies()
+        {
+            return await _repository.GetAllAcademies();
+        }
+
+        public async Task<bool> UpdateAcademy(UpdateAcademyDetailDto dto)
+        {
+            return await _repository.UpdateAcademy(dto);
+        }
+        #endregion
+
     }
 }

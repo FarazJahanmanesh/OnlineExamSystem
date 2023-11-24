@@ -10,10 +10,11 @@ namespace Domain.Contracts.Services
 {
     public interface IAcademyServices
     {
-        public Task GetAllAcademies();
-        public Task GetAcademy();
-        public Task DeleteAcademy();
-        public Task AddAcademy();
+        public Task<List<GetAcademyDetailDto>> GetAllAcademies();
+        public Task<GetAcademyDetailDto> GetAcademy(int id);
+        public Task<bool> DeleteAcademy(int id);
+        public Task<bool> UpdateAcademy(UpdateAcademyDetailDto dto);
+        public Task<bool> AddAcademy(CreateAcademyDetailDto dto);
         public Task<bool> AcademiesLogin(AcademiesLoginDetailDto dto);
         public Task<bool> ChangeAcademyPassword(ChangeAcademyPasswordDetailDto dto);
     }
