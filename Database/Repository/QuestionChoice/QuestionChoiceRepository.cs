@@ -17,10 +17,11 @@ namespace Database.Repository.QuestionChoice
         {
             this.dbContext = dbContext;
         }
-        public async Task GetAllQuestionChoice()
+        public async Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int questionId)
         {
-            await dbContext.QuestionChoices.AsNoTracking()
+            return await dbContext.QuestionChoices.AsNoTracking()
                 .ProjectToType<GetAllQuestionChoiceDetailDto>()
+                .Where(i=>i.QuestionId == questionId)
                 .ToListAsync();
         }
         public async Task GetQuestionChoice()
@@ -36,8 +37,10 @@ namespace Database.Repository.QuestionChoice
             await dbContext.QuestionChoices.FirstOrDefaultAsync(c=>c.Id==dto.Id);
             await SaveChanges();
         }
-        public async Task DeleteQuestionChoice()
+        public async Task<bool> DeleteQuestionChoice(int id)
         {
+            await
+            await SaveChanges();
         }
         private async Task SaveChanges()
         {
