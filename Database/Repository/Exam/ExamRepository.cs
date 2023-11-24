@@ -46,19 +46,19 @@ namespace Database.Repository.Exam
             }
             return false;
         }
-        public async Task<List<ShowExamsDetailDto>> ShowExams()
+        public async Task<List<ShowExamsDetailDto>> ShowExams(int skip , int take)
         {
             return await dbContext.Exams.AsNoTracking()
                 .ProjectToType<ShowExamsDetailDto>()
-                .Skip(0)
-                .Take(5)
+                .Skip(skip)
+                .Take(take)
                 .ToListAsync();
         }
-        public async Task<ShowExamsDetailDto> ShowExam()
+        public async Task<ShowExamsDetailDto> ShowExam(int id)
         {
             return await dbContext.Exams.AsNoTracking()
                 .ProjectToType<ShowExamsDetailDto>()
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(i=>i.IsActice==true&&i.Id==id);
         }
         private async Task SaveChanges()
         {

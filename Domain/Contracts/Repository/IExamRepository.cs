@@ -12,7 +12,7 @@ namespace Domain.Contracts.Repository
         public Task CreateExam(CreateExamDetailDto dto);
         public Task<bool> UpdateExam(UpdateExamDetailDto dto);
         public Task<bool> DeleteExam(DeleteExamDetailDto dto);
-        public Task<List<ShowExamsDetailDto>> ShowExams();
-        public Task<ShowExamsDetailDto> ShowExam();
+        public Task<List<ShowExamsDetailDto>> ShowExams(int skip, int take);
+        public Task<ShowExamsDetailDto> ShowExam(int id);
     }
 }

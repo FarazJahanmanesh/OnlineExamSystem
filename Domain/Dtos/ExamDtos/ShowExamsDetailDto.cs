@@ -8,5 +8,7 @@ namespace Domain.Dtos.ExamDtos
 {
     public class ShowExamsDetailDto
     {
+        public int Id { get; set; }
+        public bool IsActice { get; set; }
     }
 }
