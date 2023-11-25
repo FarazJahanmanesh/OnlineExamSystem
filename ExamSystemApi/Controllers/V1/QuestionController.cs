@@ -80,7 +80,10 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await questionServices.DeleteQuestion(request.Adapt<DeleteQuestionDetailDto>());
                 if (result)
                 {
-
+                    response.Message = "ok";
+                    response.Status = 200;
+                    response.State = ResponseStateEnum.SUCCESS;
+                    return Ok(response);
                 }
                 response.Message = "bad";
                 response.Status = 404;
