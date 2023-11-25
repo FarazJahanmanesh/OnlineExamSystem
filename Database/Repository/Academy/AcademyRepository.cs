@@ -1,4 +1,5 @@
-﻿using Domain.Contracts.Repository;
+﻿using Application.Helpers;
+using Domain.Contracts.Repository;
 using Domain.Dtos.AcademyDtos;
 using Mapster;
 using Microsoft.EntityFrameworkCore;

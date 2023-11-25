@@ -22,7 +22,7 @@ namespace ExamSystemApi.Controllers.V1
         #endregion
         [HttpGet]
         [Route("GetAllAcademy")]
-        public async Task<IActionResult> GetAllAcademies(GetAllAcademiesRequest request)
+        public async Task<IActionResult> GetAllAcademies([FromBody] GetAllAcademiesRequest request)
         {
             var response = new ActionResponse<List<GetAcademyResponse>>();
             response.Data = new List<GetAcademyResponse>();
@@ -81,7 +81,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("CreateAcademy")]
-        public async Task<IActionResult> CreateAcademy(CreateAcademyRequest request)
+        public async Task<IActionResult> CreateAcademy([FromBody] CreateAcademyRequest request)
         {
             var response = new ActionResponse<CreateAcademyResponse>();
             try
@@ -109,7 +109,7 @@ namespace ExamSystemApi.Controllers.V1
 
         [HttpPost]
         [Route("ChangeAcademyPassword")]
-        public async Task<IActionResult> ChangeAcademyPassword(ChangeAcademyPasswordRequest dto)
+        public async Task<IActionResult> ChangeAcademyPassword([FromBody] ChangeAcademyPasswordRequest dto)
         {
             var response = new ActionResponse<ChangeAcademyPasswordResponse>();
             try
@@ -137,7 +137,7 @@ namespace ExamSystemApi.Controllers.V1
 
         [HttpPost]
         [Route("DeleteAcademy")]
-        public async Task<IActionResult> DeleteAcademy(int id)
+        public async Task<IActionResult> DeleteAcademy([FromBody] int id)
         {
             var response = new ActionResponse<DeleteAcademyResponse>();
             try
@@ -164,7 +164,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("UpdateAcademy")]
-        public async Task<IActionResult> UpdateAcademy(UpdateAcademyRequest request)
+        public async Task<IActionResult> UpdateAcademy([FromBody] UpdateAcademyRequest request)
         {
             var response = new ActionResponse<UpdateAcademyResponse>();
             try

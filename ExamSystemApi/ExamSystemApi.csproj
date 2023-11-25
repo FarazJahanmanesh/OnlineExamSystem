@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Request\Answer\" />
+    <Folder Include="Models\Request\QuestionChoice\" />
+    <Folder Include="Models\Response\QuestionChoice\" />
   </ItemGroup>
 
 </Project>

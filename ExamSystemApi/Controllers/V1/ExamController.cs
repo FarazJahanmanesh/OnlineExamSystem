@@ -17,7 +17,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("CreateExam")]
-        public async Task<IActionResult> CreateExam(CreateExamRequest request)
+        public async Task<IActionResult> CreateExam([FromBody] CreateExamRequest request)
         {
             var response = new ActionResponse<CreateExamResponse>();
             try
@@ -38,7 +38,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("UpdateExam")]
-        public async Task<IActionResult> UpdateExam(UpdateExamRequest request)
+        public async Task<IActionResult> UpdateExam([FromBody] UpdateExamRequest request)
         {
             var response = new ActionResponse<UpdateExamResponse>();
             try
@@ -64,7 +64,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("DeleteExam")]
-        public async Task<IActionResult> DeleteExam(DeleteExamRequest request)
+        public async Task<IActionResult> DeleteExam([FromBody] DeleteExamRequest request)
         {
             var response = new ActionResponse<DeleteExamResponse>();
             try
@@ -120,7 +120,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("ShowExam")]
-        public async Task<IActionResult> ShowExam(int id)
+        public async Task<IActionResult> ShowExam([FromBody] int id)
         {
             var response = new ActionResponse<ShowExamResponse>();
             response.Data= new ShowExamResponse();

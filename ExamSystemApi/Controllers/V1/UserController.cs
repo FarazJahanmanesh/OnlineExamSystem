@@ -54,7 +54,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("ChangeUserPassword")]
-        public async Task<IActionResult> ChangeUserPassword(ChangeUserPasswordRequest request)
+        public async Task<IActionResult> ChangeUserPassword([FromBody] ChangeUserPasswordRequest request)
         {
             var response = new ActionResponse<ChangeUserPasswordResponse>();
             response.Data=new ChangeUserPasswordResponse();
@@ -82,7 +82,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("UpdateUser")]
-        public async Task<IActionResult> UpdateUser(UpdateUserRequest request)
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
         {
             var response = new ActionResponse<UpdateUserResponse>();
             response.Data = new UpdateUserResponse();
@@ -115,7 +115,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpGet]
         [Route("GetUser")]
-        public async Task<IActionResult> GetUser(int id)
+        public async Task<IActionResult> GetUser([FromBody] int id)
         {
             var response = new ActionResponse<GetUserResponse>();
             response.Data = new GetUserResponse();
@@ -202,7 +202,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("DeleteUser")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser([FromBody] int id)
         {
             var response = new ActionResponse<DeleteUserResponse>();
             try

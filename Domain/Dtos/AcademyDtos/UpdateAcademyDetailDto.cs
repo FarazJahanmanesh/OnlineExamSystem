@@ -8,5 +8,6 @@ namespace Domain.Dtos.AcademyDtos
 {
     public class UpdateAcademyDetailDto
     {
+        public string Password { get; set; }
     }
 }

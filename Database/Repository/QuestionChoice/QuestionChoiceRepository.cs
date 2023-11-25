@@ -21,7 +21,6 @@ namespace Database.Repository.QuestionChoice
         {
             return await dbContext.QuestionChoices.AsNoTracking()
                 .ProjectToType<GetAllQuestionChoiceDetailDto>()
-                .Where(i=>i.QuestionId == questionId)
                 .ToListAsync();
         }
         public async Task GetQuestionChoice()
@@ -37,14 +36,17 @@ namespace Database.Repository.QuestionChoice
             await dbContext.QuestionChoices.FirstOrDefaultAsync(c=>c.Id==dto.Id);
             await SaveChanges();
         }
-        public async Task<bool> DeleteQuestionChoice(int id)
+        public async Task DeleteQuestionChoice()
         {
-            await
-            await SaveChanges();
         }
         private async Task SaveChanges()
         {
             await dbContext.SaveChangesAsync();
+        }
+
+        Task<GetAllQuestionChoiceDetailDto> IQuestionChoiceRepository.GetAllQuestionChoice(int questionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -26,9 +26,9 @@ namespace Application.Services
             await repository.DeleteQuestionChoice();
         }
 
-        public async Task GetAllQuestionChoice()
+        public async Task GetAllQuestionChoice(int id)
         {
-            await repository.GetAllQuestionChoice();
+            await repository.GetAllQuestionChoice(id);
         }
 
         public async Task GetQuestionChoice()

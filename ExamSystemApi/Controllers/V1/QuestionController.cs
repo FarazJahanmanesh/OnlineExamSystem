@@ -18,7 +18,11 @@ namespace ExamSystemApi.Controllers.V1
         {
             this.questionServices = questionServices;
         }
-        public async Task<IActionResult> GetQuestion(int id)
+
+
+        [HttpGet]
+        [Route("GetQuestion")]
+        public async Task<IActionResult> GetQuestion([FromBody] int id)
         {
             var response = new ActionResponse<GetQuestionsResponse>();
             response.Data = new GetQuestionsResponse(); 
@@ -45,6 +49,9 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("GetQuestions")]
         public async Task<IActionResult> GetQuestions(int skip, int take)
         {
             var response = new ActionResponse<List<GetQuestionsResponse>>();
@@ -72,7 +79,10 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        public async Task<IActionResult> DeleteQuestion(DeleteQuestionRequest request)
+
+        [HttpPost]
+        [Route("DeleteQuestion")]
+        public async Task<IActionResult> DeleteQuestion([FromBody] DeleteQuestionRequest request)
         {
             var response = new ActionResponse<DeleteQuestionResponse>();
             try
@@ -97,7 +107,10 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        public async Task<IActionResult> UpdateQuestion(UpdateQuestionRequest request)
+
+        [HttpPost]
+        [Route("UpdateQuestion")]
+        public async Task<IActionResult> UpdateQuestion([FromBody] UpdateQuestionRequest request)
         {
             var response = new ActionResponse<UpdateQuestionResponse>();
             try
@@ -122,8 +135,10 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        
-        public async Task<IActionResult> AddQuestion(AddQuestionRequest request)
+
+        [HttpPost]
+        [Route("AddQuestion")]
+        public async Task<IActionResult> AddQuestion([FromBody] AddQuestionRequest request)
         {
             var response = new ActionResponse<AddQuestionResponse>();
             try

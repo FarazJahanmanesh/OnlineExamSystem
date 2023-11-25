@@ -79,7 +79,7 @@ namespace ExamSystemApi.Controllers.V1
             return Ok(response);
         }
         [HttpPost]
-        [Route("GetAnswer")]
+        [Route("AddAnswer")]
         public async Task<IActionResult> AddAnswer(AddAnswerRequest request)
         {
             var response = new ActionResponse<AddAnswerResponse>();

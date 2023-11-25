@@ -1,5 +1,6 @@
 using Database;
 using Dependencies.Dependencies;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+TypeAdapterConfig.GlobalSettings.UsePasswordHashing();
 //db context
 string connectionString = builder.Configuration.GetConnectionString("ExamDataBase");
 builder.Services.AddDbContext<SystemDbContext>(options=>options.UseSqlServer(connectionString));
