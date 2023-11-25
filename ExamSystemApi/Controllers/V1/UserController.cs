@@ -56,8 +56,29 @@ namespace ExamSystemApi.Controllers.V1
         [Route("ChangeUserPassword")]
         public async Task<IActionResult> ChangeUserPassword(ChangeUserPasswordRequest request)
         {
-            await services.ChangeUserPassword(request.Adapt<ChangeUserPasswordDetailDto>());
-            return Ok();
+            var response = new ActionResponse<ChangeUserPasswordResponse>();
+            response.Data=new ChangeUserPasswordResponse();
+            try
+            {
+                var result = await services.ChangeUserPassword(request.Adapt<ChangeUserPasswordDetailDto>());
+                if (result)
+                {
+                    response.State=ResponseStateEnum.SUCCESS;
+                    response.Status=200;
+                    response.Message = "success";
+                    return Ok(response);
+                }
+                response.State = ResponseStateEnum.FAILED;
+                response.Status = 404;
+                response.Message = "bad";
+            }
+            catch
+            {
+                response.State = ResponseStateEnum.FAILED;
+                response.Status = 404;
+                response.Message = "bad";
+            }
+            return Ok(response);
         }
         [HttpPost]
         [Route("UpdateUser")]
@@ -163,15 +184,48 @@ namespace ExamSystemApi.Controllers.V1
         [Route("CreateUser")]
         public async Task<IActionResult> CreateUser([FromBody]CreateUserRequest request)
         {
-            await services.CreateUser(request.Adapt<CreateUserDetailDto>());
-            return Ok();
+            var response = new ActionResponse<CreateUserResponse>();
+            try
+            {
+                await services.CreateUser(request.Adapt<CreateUserDetailDto>());
+                response.State= ResponseStateEnum.SUCCESS;
+                response.Status = 200;
+                response.Message = "ok";
+            }
+            catch
+            {
+                response.State = ResponseStateEnum.FAILED;
+                response.Status = 400;
+                response.Message = "bad";
+            }
+            return Ok(response);
         }
         [HttpPost]
         [Route("DeleteUser")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            await services.DeleteUser(id);
-            return Ok();
+            var response = new ActionResponse<DeleteUserResponse>();
+            try
+            {
+                var result = await services.DeleteUser(id);
+                if (result)
+                {
+                    response.Message = "ok";
+                    response.State = ResponseStateEnum.SUCCESS;
+                    response.Status = 200;
+                    return Ok(response);
+                }
+                response.Message = "bad";
+                response.State = ResponseStateEnum.FAILED;
+                response.Status = 404;
+            }
+            catch
+            {
+                response.Message = "bad";
+                response.State=ResponseStateEnum.FAILED;
+                response.Status = 404;
+            }
+            return Ok(response);
         }
     }
 }

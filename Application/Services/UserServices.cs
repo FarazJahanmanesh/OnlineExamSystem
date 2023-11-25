@@ -40,9 +40,9 @@ namespace Application.Services
         {
             return await repository.UpdateUser(dto);
         }
-        public async Task DeleteUser(int id)
+        public async Task<bool> DeleteUser(int id)
         {
-            await repository.DeleteUser(id);
+            return await repository.DeleteUser(id);
         }
         #endregion
 

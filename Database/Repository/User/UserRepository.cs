@@ -52,15 +52,17 @@ namespace Database.Repository.User
             await dbContext.Users.AddAsync(dto.Adapt<Domain.Entities.User>());
             await SaveChange();
         }
-        public async Task DeleteUser(int id)
+        public async Task<bool> DeleteUser(int id)
         {
             var  user = await dbContext.Users
                 .FirstOrDefaultAsync(i => i.IsActive==true && i.Id == id);
             if(user != null)
             {
                 user.IsActive = false;
+                await SaveChange();
+                return true;
             }
-            await SaveChange();
+            return false;
         }
         #endregion
 

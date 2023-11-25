@@ -15,6 +15,6 @@ namespace Domain.Contracts.Services
         public Task<GetUserDetailDto> GetUser(int id);
         public Task<List<GetUserDetailDto>> GetListOfUser(int skip, int take);
         public Task CreateUser(CreateUserDetailDto dto);
-        public Task DeleteUser(int id);
+        public Task<bool> DeleteUser(int id);
     }
 }
