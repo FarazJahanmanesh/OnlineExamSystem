@@ -15,6 +15,8 @@ namespace ExamSystemApi.Controllers.V1
         {
             this.examServices = examServices;
         }
+        [HttpPost]
+        [Route("CreateExam")]
         public async Task<IActionResult> CreateExam(CreateExamRequest request)
         {
             var response = new ActionResponse<CreateExamResponse>();
@@ -34,6 +36,8 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
+        [HttpPost]
+        [Route("UpdateExam")]
         public async Task<IActionResult> UpdateExam(UpdateExamRequest request)
         {
             var response = new ActionResponse<UpdateExamResponse>();
@@ -58,6 +62,8 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
+        [HttpPost]
+        [Route("DeleteExam")]
         public async Task<IActionResult> DeleteExam(DeleteExamRequest request)
         {
             var response = new ActionResponse<DeleteExamResponse>();
@@ -83,7 +89,8 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        
+        [HttpPost]
+        [Route("ShowExams")]
         public async Task<IActionResult> ShowExams(int skip, int take)
         {
             var response = new ActionResponse<List<ShowExamResponse>>();
@@ -111,6 +118,8 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
+        [HttpPost]
+        [Route("ShowExam")]
         public async Task<IActionResult> ShowExam(int id)
         {
             var response = new ActionResponse<ShowExamResponse>();
