@@ -10,7 +10,7 @@ namespace Domain.Contracts.Services
 {
     public interface IAcademyServices
     {
-        public Task<List<GetAcademyDetailDto>> GetAllAcademies();
+        public Task<List<GetAcademyDetailDto>> GetAllAcademies(int skip, int take);
         public Task<GetAcademyDetailDto> GetAcademy(int id);
         public Task<bool> DeleteAcademy(int id);
         public Task<bool> UpdateAcademy(UpdateAcademyDetailDto dto);

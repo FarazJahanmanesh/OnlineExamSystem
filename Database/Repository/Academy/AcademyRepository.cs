@@ -20,10 +20,13 @@ namespace Database.Repository.Academy
             this.dbContext = dbContext;
         }
         #endregion
-        public async Task<List<GetAcademyDetailDto>> GetAllAcademies()
+        public async Task<List<GetAcademyDetailDto>> GetAllAcademies(int skip,int take)
         {
             return await dbContext.Academies.AsNoTracking()
                 .ProjectToType<GetAcademyDetailDto>()
+                .Where(i=>i.IsActive==true)
+                .Skip(skip)
+                .Take(take)
                 .ToListAsync();
         }
         public async Task<GetAcademyDetailDto> GetAcademy(int id)

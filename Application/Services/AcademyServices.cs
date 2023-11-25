@@ -44,9 +44,9 @@ namespace Application.Services
             return await _repository.GetAcademy(id);
         }
 
-        public async Task<List<GetAcademyDetailDto>> GetAllAcademies()
+        public async Task<List<GetAcademyDetailDto>> GetAllAcademies(int skip, int take)
         {
-            return await _repository.GetAllAcademies();
+            return await _repository.GetAllAcademies(skip,take);
         }
 
         public async Task<bool> UpdateAcademy(UpdateAcademyDetailDto dto)
