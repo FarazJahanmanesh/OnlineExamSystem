@@ -29,7 +29,7 @@ namespace ExamSystemApi.Controllers.V1
             try
             {
                 var result = await academyServices.GetAllAcademies(request.Skip, request.Take);
-                if(result == null)
+                if(result != null)
                 {
                     response.Data = result.Adapt<List<GetAcademyResponse>>();
                     response.State = ResponseStateEnum.SUCCESS;
@@ -59,7 +59,7 @@ namespace ExamSystemApi.Controllers.V1
             try
             {
                 var result = await academyServices.GetAcademy(id);
-                if (result == null)
+                if (result != null)
                 {
                     response.Data = result.Adapt<GetAcademyResponse>();
                     response.State = ResponseStateEnum.SUCCESS;
