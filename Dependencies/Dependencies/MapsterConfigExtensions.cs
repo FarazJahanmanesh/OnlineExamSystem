@@ -3,6 +3,7 @@ using Domain.Dtos.AcademyDtos;
 using Domain.Dtos.UserDtos;
 using Domain.Entities;
 using Mapster;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,26 +15,29 @@ namespace Dependencies.Dependencies
 {
     public static class MapsterConfigExtensions
     {
-        public static void UsePasswordHashing(this TypeAdapterConfig config)
+        public static void ConfigureMappings(this IServiceCollection services)
         {
-            config.ForType<ChangeAcademyPasswordDetailDto, Academy>()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
-            config.ForType<AcademiesLoginDetailDto, Academy>()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
-            config.ForType<CreateAcademyDetailDto, Academy >()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
-            config.ForType<UpdateAcademyDetailDto,Academy>()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
+            TypeAdapterConfig.GlobalSettings.Default.NameMatchingStrategy(NameMatchingStrategy.Flexible);
 
-            config.ForType<UpdateUserDetailDto, User>()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
-            config.ForType<CreateUserDetailDto, User>()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
-            config.ForType<UserLoginDetailDto,User > ()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
-            config.ForType<ChangeUserPasswordDetailDto, User>()
-                .Map(dest => dest.Password, src => src.Password.SHA1HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<UserLoginDetailDto, User>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<CreateUserDetailDto, User>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<ChangeUserPasswordDetailDto, User>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<UpdateUserDetailDto, User>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
 
+            TypeAdapterConfig.GlobalSettings.ForType<CreateAcademyDetailDto, Academy>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<AcademiesLoginDetailDto, Academy>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<ChangeAcademyPasswordDetailDto, Academy>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            TypeAdapterConfig.GlobalSettings.ForType<UpdateAcademyDetailDto, Academy>()
+                .Map(dest => dest.Password, src => src.Password.SHA512HashCode());
+            
+            services.AddSingleton(TypeAdapterConfig.GlobalSettings);
         }
     }
 }
