@@ -72,7 +72,7 @@ namespace Database.Repository.Academy
         {
             var user = await dbContext.Academies.AsNoTracking()
                 .ProjectToType<AcademiesLoginDetailDto>()
-                .FirstOrDefaultAsync(c => c.IsActive==true && c.UserName == dto.UserName && c.Password == dto.Password);
+                .FirstOrDefaultAsync(c => c.IsActive==true && c.UserName == dto.UserName && c.Password == dto.Password.SHA512HashCode());
             if (user == null)
             {
                 return false;
@@ -84,7 +84,7 @@ namespace Database.Repository.Academy
         }
         public async Task<bool> ChangeAcademyPassword(ChangeAcademyPasswordDetailDto dto)
         {
-            var academy = await dbContext.Academies.FirstOrDefaultAsync(c => c.IsActive == true && c.Id == dto.Id && c.Password == dto.Password);
+            var academy = await dbContext.Academies.FirstOrDefaultAsync(c => c.IsActive == true && c.Id == dto.Id && c.Password == dto.Password.SHA512HashCode());
             if (academy != null)
             {
                 academy = dto.Adapt(academy);

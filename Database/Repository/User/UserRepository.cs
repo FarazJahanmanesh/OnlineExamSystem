@@ -71,7 +71,7 @@ namespace Database.Repository.User
         {
             var user = await dbContext.Users.AsNoTracking()
                 .ProjectToType<UserLoginDetailDto>()
-                .FirstOrDefaultAsync(c => c.IsActive == true && c.UserName == dto.UserName && c.Password == dto.Password);
+                .FirstOrDefaultAsync(c => c.IsActive == true && c.UserName == dto.UserName && c.Password == dto.Password.SHA512HashCode());
             if (user == null)
             {
                 return false;

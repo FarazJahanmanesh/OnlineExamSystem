@@ -25,7 +25,6 @@ namespace ExamSystemApi.Controllers.V1
         public async Task<IActionResult> UserLogin([FromBody] UserLoginRequest request)
         {
             var response = new ActionResponse<UserLoginResponse>();
-            response.Data = new UserLoginResponse();
             try
             {
                 var result = await services.Login(request.Adapt<UserLoginDetailDto>());
@@ -41,7 +40,6 @@ namespace ExamSystemApi.Controllers.V1
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Message = "ok";
                 }
-                response.Data.IsSuccess = result;
                 return Ok(response);
             }
             catch (Exception ex)
