@@ -113,7 +113,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpGet]
         [Route("GetUser")]
-        public async Task<IActionResult> GetUser([FromBody] int id)
+        public async Task<IActionResult> GetUser(int id)
         {
             var response = new ActionResponse<GetUserResponse>();
             response.Data = new GetUserResponse();
