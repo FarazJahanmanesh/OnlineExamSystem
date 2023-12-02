@@ -89,7 +89,7 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        [HttpPost]
+        [HttpGet]
         [Route("ShowExams")]
         public async Task<IActionResult> ShowExams(int skip, int take)
         {
@@ -118,9 +118,9 @@ namespace ExamSystemApi.Controllers.V1
             }
             return Ok(response);
         }
-        [HttpPost]
+        [HttpGet]
         [Route("ShowExam")]
-        public async Task<IActionResult> ShowExam([FromBody] int id)
+        public async Task<IActionResult> ShowExam(int id)
         {
             var response = new ActionResponse<ShowExamResponse>();
             response.Data= new ShowExamResponse();

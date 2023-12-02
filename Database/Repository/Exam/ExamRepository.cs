@@ -50,6 +50,7 @@ namespace Database.Repository.Exam
         {
             return await dbContext.Exams.AsNoTracking()
                 .ProjectToType<ShowExamsDetailDto>()
+                .Where(c=>c.IsActice==true)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
