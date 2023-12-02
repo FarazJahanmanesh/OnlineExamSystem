@@ -1,5 +1,6 @@
 ﻿using Domain.Contracts.Repository;
 using Domain.Dtos.QuestionChoice;
+using Domain.Dtos.QuestionChoiceDtos;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,15 +18,10 @@ namespace Database.Repository.QuestionChoice
         {
             this.dbContext = dbContext;
         }
-        public async Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int questionId)
+        public async Task<GetQuestionChoiceDetailDto> GetQuestionChoice(int id, int questionId)
         {
-            return await dbContext.QuestionChoices.AsNoTracking()
-                .ProjectToType<GetAllQuestionChoiceDetailDto>()
-                .ToListAsync();
-        }
-        public async Task GetQuestionChoice()
-        {
-
+            return await dbContext.QuestionChoices.ProjectToType<GetQuestionChoiceDetailDto>()
+                .FirstOrDefaultAsync(c=>c.Id==id && c.QuestionId==questionId);
         }
         public async Task AddQuestionChoice(AddQuestionChoiceDetailDto dto)
         {
@@ -33,20 +29,27 @@ namespace Database.Repository.QuestionChoice
         }
         public async Task UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto)
         {
-            await dbContext.QuestionChoices.FirstOrDefaultAsync(c=>c.Id==dto.Id);
+            var questionChoice = await dbContext.QuestionChoices.FirstOrDefaultAsync(c=>c.Id==dto.Id);
+            questionChoice = dto.Adapt(questionChoice);
             await SaveChanges();
         }
-        public async Task DeleteQuestionChoice()
+        public async Task DeleteQuestionChoice(int id)
         {
+            var questionChoice = await dbContext.QuestionChoices.FirstOrDefaultAsync(c => c.Id == id);
+            dbContext.QuestionChoices.Remove(questionChoice);
+            await SaveChanges();
+        }
+        public async Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int questionId)
+        {
+            return await dbContext.QuestionChoices.ProjectToType<GetAllQuestionChoiceDetailDto>()
+                .Where(c => c.QuestionId == questionId)
+                .Skip(0)
+                .Take(4)
+                .ToListAsync();
         }
         private async Task SaveChanges()
         {
             await dbContext.SaveChangesAsync();
-        }
-
-        Task<GetAllQuestionChoiceDetailDto> IQuestionChoiceRepository.GetAllQuestionChoice(int questionId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

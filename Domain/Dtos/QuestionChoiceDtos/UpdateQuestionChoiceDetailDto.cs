@@ -8,6 +8,7 @@ namespace Domain.Dtos.QuestionChoice
 {
     public class UpdateQuestionChoiceDetailDto
     {
+        public int Id { get; set; }
         public string Content { get; set; }
         public bool IsTrue { get; set; }
         public int QuestionId { get; set; }

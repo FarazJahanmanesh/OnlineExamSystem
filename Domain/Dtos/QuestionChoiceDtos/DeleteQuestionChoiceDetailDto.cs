@@ -8,5 +8,6 @@ namespace Domain.Dtos.QuestionChoice
 {
     public class DeleteQuestionChoiceDetailDto
     {
+        public int QuestionId { get; set; }
     }
 }

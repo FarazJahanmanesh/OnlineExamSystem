@@ -1,6 +1,7 @@
 ﻿using Domain.Contracts.Repository;
 using Domain.Contracts.Services;
 using Domain.Dtos.QuestionChoice;
+using Domain.Dtos.QuestionChoiceDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +22,19 @@ namespace Application.Services
             await repository.AddQuestionChoice(dto);
         }
 
-        public async Task DeleteQuestionChoice()
+        public async Task DeleteQuestionChoice(int id)
         {
-            await repository.DeleteQuestionChoice();
+            await repository.DeleteQuestionChoice(id);
         }
 
-        public async Task GetAllQuestionChoice(int id)
+        public async Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int id)
         {
-            await repository.GetAllQuestionChoice(id);
+            return await repository.GetAllQuestionChoice(id);
         }
 
-        public async Task GetQuestionChoice()
+        public async Task<GetQuestionChoiceDetailDto> GetQuestionChoice(int id, int questionId)
         {
-            await repository.GetQuestionChoice();
+            return await repository.GetQuestionChoice(id,questionId);
         }
 
         public async Task UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto)

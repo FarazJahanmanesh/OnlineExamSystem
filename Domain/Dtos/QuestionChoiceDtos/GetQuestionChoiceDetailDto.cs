@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Dtos.QuestionChoice
+namespace Domain.Dtos.QuestionChoiceDtos
 {
-    public class AddQuestionChoiceDetailDto
+    public class GetQuestionChoiceDetailDto
     {
+        public int Id { get; set; }
         public string Content { get; set; }
         public bool IsTrue { get; set; }
         public int QuestionId { get; set; }
