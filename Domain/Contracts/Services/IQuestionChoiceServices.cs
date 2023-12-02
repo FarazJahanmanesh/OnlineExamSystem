@@ -13,7 +13,7 @@ namespace Domain.Contracts.Services
         public Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int questionId);
         public Task<GetQuestionChoiceDetailDto> GetQuestionChoice(int id, int questionId);
         public Task AddQuestionChoice(AddQuestionChoiceDetailDto dto);
-        public Task UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto);
-        public Task DeleteQuestionChoice(int id);
+        public Task<bool> UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto);
+        public Task<bool> DeleteQuestionChoice(int id);
     }
 }

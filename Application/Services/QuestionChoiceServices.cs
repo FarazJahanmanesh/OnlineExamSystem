@@ -22,9 +22,9 @@ namespace Application.Services
             await repository.AddQuestionChoice(dto);
         }
 
-        public async Task DeleteQuestionChoice(int id)
+        public async Task<bool> DeleteQuestionChoice(int id)
         {
-            await repository.DeleteQuestionChoice(id);
+            return await repository.DeleteQuestionChoice(id);
         }
 
         public async Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int id)
@@ -37,9 +37,9 @@ namespace Application.Services
             return await repository.GetQuestionChoice(id,questionId);
         }
 
-        public async Task UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto)
+        public async Task<bool> UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto)
         {
-            await repository.UpdateQuestionChoice(dto);
+            return await repository.UpdateQuestionChoice(dto);
         }
     }
 }

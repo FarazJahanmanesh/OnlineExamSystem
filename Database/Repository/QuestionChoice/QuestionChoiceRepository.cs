@@ -27,17 +27,27 @@ namespace Database.Repository.QuestionChoice
         {
             await dbContext.QuestionChoices.AddAsync(dto.Adapt<Domain.Entities.QuestionChoice>());
         }
-        public async Task UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto)
+        public async Task<bool> UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto)
         {
             var questionChoice = await dbContext.QuestionChoices.FirstOrDefaultAsync(c=>c.Id==dto.Id);
-            questionChoice = dto.Adapt(questionChoice);
-            await SaveChanges();
+            if(questionChoice!=null)
+            {
+                questionChoice = dto.Adapt(questionChoice);
+                await SaveChanges();
+                return true;
+            }
+            return false;
         }
-        public async Task DeleteQuestionChoice(int id)
+        public async Task<bool> DeleteQuestionChoice(int id)
         {
             var questionChoice = await dbContext.QuestionChoices.FirstOrDefaultAsync(c => c.Id == id);
-            dbContext.QuestionChoices.Remove(questionChoice);
-            await SaveChanges();
+            if(questionChoice != null)
+            {
+                dbContext.QuestionChoices.Remove(questionChoice);
+                await SaveChanges();
+                return true;
+            }
+            return false;
         }
         public async Task<List<GetAllQuestionChoiceDetailDto>> GetAllQuestionChoice(int questionId)
         {
