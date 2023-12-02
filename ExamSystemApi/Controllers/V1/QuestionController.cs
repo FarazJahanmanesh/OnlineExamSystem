@@ -22,7 +22,7 @@ namespace ExamSystemApi.Controllers.V1
 
         [HttpGet]
         [Route("GetQuestion")]
-        public async Task<IActionResult> GetQuestion([FromBody] int id)
+        public async Task<IActionResult> GetQuestion(int id)
         {
             var response = new ActionResponse<GetQuestionsResponse>();
             response.Data = new GetQuestionsResponse(); 
