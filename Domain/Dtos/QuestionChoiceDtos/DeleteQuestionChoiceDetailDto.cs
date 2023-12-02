@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Dtos.QuestionChoice
 {
-    public class GetAllQuestionChoiceDetailDto
+    public class DeleteQuestionChoiceDetailDto
     {
-        public int QuestionId { get; set; }
     }
 }

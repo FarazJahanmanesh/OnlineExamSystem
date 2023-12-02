@@ -9,10 +9,10 @@ namespace Domain.Contracts.Services
 {
     public interface IQuestionChoiceServices
     {
-        public Task GetAllQuestionChoice(int id);
-        public Task GetQuestionChoice();
+        public Task GetAllQuestionChoice(int skip ,int take);
+        public Task GetQuestionChoice(int id);
         public Task AddQuestionChoice(AddQuestionChoiceDetailDto dto);
         public Task UpdateQuestionChoice(UpdateQuestionChoiceDetailDto dto);
-        public Task DeleteQuestionChoice();
+        public Task DeleteQuestionChoice(DeleteQuestionChoiceDetailDto dto);
     }
 }
