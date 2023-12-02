@@ -9,6 +9,7 @@ namespace Domain.Dtos.QuestionDtos
     public class GetQuestionsDetailDto
     {
         public int Id { get; set; }
-        public bool IsActive { get; set; }
+        public float Score { get; set; }
+        public string Content { get; set; }
     }
 }
