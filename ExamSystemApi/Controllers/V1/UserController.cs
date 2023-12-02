@@ -200,7 +200,7 @@ namespace ExamSystemApi.Controllers.V1
         }
         [HttpPost]
         [Route("DeleteUser")]
-        public async Task<IActionResult> DeleteUser([FromBody] int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             var response = new ActionResponse<DeleteUserResponse>();
             try
