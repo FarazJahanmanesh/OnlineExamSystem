@@ -2,5 +2,6 @@
 {
     public class UpdateAcademyRequest
     {
+        public string Password { get; set; }
     }
 }

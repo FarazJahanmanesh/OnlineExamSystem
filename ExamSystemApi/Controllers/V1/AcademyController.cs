@@ -22,13 +22,13 @@ namespace ExamSystemApi.Controllers.V1
         #endregion
         [HttpGet]
         [Route("GetAllAcademy")]
-        public async Task<IActionResult> GetAllAcademies([FromBody] GetAllAcademiesRequest request)
+        public async Task<IActionResult> GetAllAcademies(int skip,int take)
         {
             var response = new ActionResponse<List<GetAcademyResponse>>();
             response.Data = new List<GetAcademyResponse>();
             try
             {
-                var result = await academyServices.GetAllAcademies(request.Skip, request.Take);
+                var result = await academyServices.GetAllAcademies(skip, take);
                 if(result != null)
                 {
                     response.Data = result.Adapt<List<GetAcademyResponse>>();
@@ -137,7 +137,7 @@ namespace ExamSystemApi.Controllers.V1
 
         [HttpPost]
         [Route("DeleteAcademy")]
-        public async Task<IActionResult> DeleteAcademy([FromBody] int id)
+        public async Task<IActionResult> DeleteAcademy(int id)
         {
             var response = new ActionResponse<DeleteAcademyResponse>();
             try
