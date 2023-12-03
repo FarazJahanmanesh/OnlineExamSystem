@@ -1,4 +1,5 @@
-﻿using Domain.Common.Response;
+﻿using Domain.Common;
+using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.AcademyDtos;
 using ExamSystemApi.Models.Request.Academy;
@@ -33,18 +34,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Data = result.Adapt<List<GetAcademyResponse>>();
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     response.Status = 200;
                     return Ok(response);
                 }
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Calling;
                 response.Status = 404;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
             }
             return Ok(response);
@@ -63,18 +64,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Data = result.Adapt<GetAcademyResponse>();
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     response.Status = 200;
                     return Ok(response);
                 }
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.AcademyNotFound;
                 response.Status = 404;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
             }
             return Ok(response);
@@ -89,18 +90,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await academyServices.AddAcademy(request.Adapt<CreateAcademyDetailDto>());
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_CreateAcademy;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_CreateAcademy;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
@@ -119,18 +120,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_ChangePassword;
                     return Ok(response);
                 }
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_ChangePassword;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -145,18 +146,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await academyServices.DeleteAcademy(id);
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_DeleteAcademy;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_DeleteAcademy;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
@@ -172,18 +173,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await academyServices.UpdateAcademy(request.Adapt<UpdateAcademyDetailDto>());
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_UpdateAcademy;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_UpdateAcademy;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
@@ -200,18 +201,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await academyServices.AcademiesLogin(request.Adapt<AcademiesLoginDetailDto>());
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Login;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Login;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
