@@ -1,4 +1,5 @@
-﻿using Domain.Common.Response;
+﻿using Domain.Common;
+using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.QuestionChoice;
 using Domain.Entities;
@@ -33,18 +34,18 @@ namespace ExamSystemApi.Controllers.V1
                     response.Data = result.Adapt(response.Data);
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Calling;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -62,18 +63,18 @@ namespace ExamSystemApi.Controllers.V1
                     response.Data = result.Adapt(response.Data);
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.QuestionChoiceNotFound;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -89,18 +90,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_DeleteQuestionChoice;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_DeleteQuestionChoice;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -116,18 +117,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_UpdateQuestionChoice;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_UpdateQuestionChoice;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -141,7 +142,7 @@ namespace ExamSystemApi.Controllers.V1
                 await questionChoiceServices.AddQuestionChoice(request.Adapt<AddQuestionChoiceDetailDto>());
                 response.Status = 200;
                 response.State = ResponseStateEnum.SUCCESS;
-                response.Message = "ok";
+                response.Message = StaticStrings.S_CreateQuestionChoice;
                 return Ok(response);
                 
             }
@@ -149,7 +150,7 @@ namespace ExamSystemApi.Controllers.V1
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_CreateQuestionChoice;
             }
             return Ok(response);
         }
