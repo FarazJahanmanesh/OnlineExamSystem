@@ -11,6 +11,18 @@ namespace Domain.Common
         //S==>Successful
         //F==>Failed
 
+        #region Answer
+
+        public const string AnswerNotFound = "جواب مورد نظر یافت نشد";
+        public const string S_CreateAnswer = "جواب با موفقیت ایجاد شد";
+        public const string F_CreateAnswer = "جواب ایجاد نشد";
+        public const string S_DeleteAnswer = "جواب با موفقیت حذف شد";
+        public const string F_DeleteAnswer = "عملیات حذف جواب انجام نشد";
+        public const string S_UpdateAnswer = "جواب با موفقیت تغییر یافت شد";
+        public const string F_UpdateAnswer = "عملیات تغییر جواب انجام نشد";
+
+        #endregion
+        
         #region Question
 
         public const string QuestionNotFound = "سوال مورد نظر یافت نشد";

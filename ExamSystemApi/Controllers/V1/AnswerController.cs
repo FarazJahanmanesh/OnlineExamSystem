@@ -1,4 +1,5 @@
-﻿using Domain.Common.Response;
+﻿using Domain.Common;
+using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.AnswerDtos;
 using ExamSystemApi.Models.Request.Answer;
@@ -32,18 +33,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Data = result.Adapt<List<GetAnswerResponse>>();
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     response.Status = 200;
                     return Ok(response);
                 }
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Calling;
                 response.Status = 404;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
             }
             return Ok(response);
@@ -62,18 +63,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Data = result.Adapt<GetAnswerResponse>();
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     response.Status = 200;
                     return Ok(response);
                 }
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Calling;
                 response.Status = 404;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
             }
             return Ok(response);
@@ -86,13 +87,13 @@ namespace ExamSystemApi.Controllers.V1
             try
             {
                 await answerServices.AddAnswer(request.Adapt<AddAnswerDetailDto>());
-                response.Message = "ok";
+                response.Message = StaticStrings.S_CreateAnswer;
                 response.State=ResponseStateEnum.SUCCESS;
                 response.Status=200;
             }
             catch
             {
-                response.Message = "ok";
+                response.Message = StaticStrings.F_CreateAnswer;
                 response.State = ResponseStateEnum.SUCCESS;
                 response.Status = 200;
             }
