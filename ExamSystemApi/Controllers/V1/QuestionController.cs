@@ -1,4 +1,5 @@
-﻿using Domain.Common.Response;
+﻿using Domain.Common;
+using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.QuestionDtos;
 using ExamSystemApi.Models.Request.Question;
@@ -31,19 +32,19 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await questionServices.GetQuestion(id);
                 if(result != null)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Data = result.Adapt<GetQuestionsResponse>();
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.QuestionNotFound;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
@@ -61,19 +62,19 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await questionServices.GetQuestions(skip, take);
                 if(result != null)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Data = result.Adapt<List<GetQuestionsResponse>>();
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Calling;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
@@ -90,18 +91,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await questionServices.DeleteQuestion(request.Adapt<DeleteQuestionDetailDto>());
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_DeleteQuestion;
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_DeleteUser;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
@@ -118,18 +119,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await questionServices.UpdateQuestion(request.Adapt<UpdateQuestionDetailDto>());
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_UpdateQuestion;
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_UpdateQuestion;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
@@ -144,14 +145,14 @@ namespace ExamSystemApi.Controllers.V1
             try
             {
                 await questionServices.AddQuestion(request.Adapt<AddQuestionDetailDto>());
-                response.Message = "ok";
+                response.Message = StaticStrings.S_CreateQuestion;
                 response.Status = 200;
                 response.State = ResponseStateEnum.SUCCESS;
                 return Ok(response);
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.F_CreateQuestion;
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
             }
