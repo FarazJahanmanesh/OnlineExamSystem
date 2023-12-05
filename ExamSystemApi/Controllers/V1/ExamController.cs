@@ -1,4 +1,5 @@
-﻿using Domain.Common.Response;
+﻿using Domain.Common;
+using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.ExamDtos;
 using ExamSystemApi.Models.Request.Exam;
@@ -25,14 +26,14 @@ namespace ExamSystemApi.Controllers.V1
                 await examServices.CreateExam(request.Adapt<CreateExamDetailDto>());
                 response.Status = 200;
                 response.State = ResponseStateEnum.SUCCESS;
-                response.Message = "ok";
+                response.Message = StaticStrings.S_CreateUser;
                 return Ok(response);
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_CreateUser;
             }
             return Ok(response);
         }
@@ -48,17 +49,17 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_UpdateExam;
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_UpdateExam;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -74,18 +75,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_DeleteUser;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_DeleteUser;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -103,18 +104,18 @@ namespace ExamSystemApi.Controllers.V1
                     response.Data = result.Adapt<List<ShowExamResponse>> ();
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_Calling;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -132,18 +133,18 @@ namespace ExamSystemApi.Controllers.V1
                     response.Data = result.Adapt<ShowExamResponse>();
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     return Ok(response);
                 }
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ExamNotFound;
             }
             catch
             {
                 response.Status = 404;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }

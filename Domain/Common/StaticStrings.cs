@@ -11,6 +11,18 @@ namespace Domain.Common
         //S==>Successful
         //F==>Failed
 
+        #region Exam
+
+        public const string ExamNotFound = "امتحان مورد نظر یافت نشد";
+        public const string S_CreateExam = "امتحان با موفقیت ایجاد شد";
+        public const string F_CreateExam = "امتحان ایجاد نشد";
+        public const string S_DeleteExam = "امتحان با موفقیت حذف شد";
+        public const string F_DeleteExam = "عملیات حذف امتحان انجام نشد";
+        public const string S_UpdateExam = "امتحان با موفقیت تغییر یافت شد";
+        public const string F_UpdateExam = "عملیات تغییر امتحان انجام نشد";
+
+        #endregion
+
         #region User
 
         public const string UserNotFound = "کاربر مورد نظر یافت نشد";
