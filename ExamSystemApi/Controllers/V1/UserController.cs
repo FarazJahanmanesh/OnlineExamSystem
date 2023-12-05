@@ -1,4 +1,5 @@
-﻿using Domain.Common.Response;
+﻿using Domain.Common;
+using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.UserDtos;
 using ExamSystemApi.Models.Request;
@@ -32,13 +33,13 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Status = 400;
                     response.State = ResponseStateEnum.FAILED;
-                    response.Message = "bad";
+                    response.Message = StaticStrings.F_Login;
                 }
                 else
                 {
                     response.Status = 200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Login;
                 }
                 return Ok(response);
             }
@@ -46,7 +47,7 @@ namespace ExamSystemApi.Controllers.V1
             {
                 response.Status = 403;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "badd";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -63,18 +64,18 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.State=ResponseStateEnum.SUCCESS;
                     response.Status=200;
-                    response.Message = "success";
+                    response.Message = StaticStrings.S_ChangePassword;
                     return Ok(response);
                 }
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_ChangePassword;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -91,7 +92,7 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_UpdateUser;
                     response.Data = newUser.Adapt<UpdateUserResponse>();
                     return Ok(response);
                 }
@@ -99,7 +100,7 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 404;
-                    response.Message = "bad";
+                    response.Message = StaticStrings.F_UpdateUser;
                     return Ok(response);
                 }
             }
@@ -107,7 +108,7 @@ namespace ExamSystemApi.Controllers.V1
             {
                 response.State = ResponseStateEnum.SUCCESS;
                 response.Status = 503;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -125,7 +126,7 @@ namespace ExamSystemApi.Controllers.V1
                     response.Data = user.Adapt<GetUserResponse>();
                     response.Status=200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
 
                     return Ok(response);
                 }
@@ -133,7 +134,7 @@ namespace ExamSystemApi.Controllers.V1
                 {
                     response.Status = 404;
                     response.State = ResponseStateEnum.FAILED;
-                    response.Message = "bad";
+                    response.Message = StaticStrings.UserNotFound;
                     return Ok(response);
                 }
             }
@@ -141,7 +142,7 @@ namespace ExamSystemApi.Controllers.V1
             {
                 response.Status = 503;
                 response.State = ResponseStateEnum.FAILED;
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -159,14 +160,14 @@ namespace ExamSystemApi.Controllers.V1
                     response.Data = users.Adapt<List<GetUserResponse>>();
                     response.Status=200;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_Calling;
                     return Ok(response);
                 }
                 else
                 {
                     response.Status = 404;
                     response.State = ResponseStateEnum.SUCCESS;
-                    response.Message = "bad";
+                    response.Message = StaticStrings.F_Calling;
                     return Ok(response);
                 }
             }
@@ -174,7 +175,7 @@ namespace ExamSystemApi.Controllers.V1
             {
                 response.Status = 503;
                 response.State = ResponseStateEnum.SUCCESS;
-                response.Message = "ok";
+                response.Message =StaticStrings.ErrorInSystem;
             }
             return Ok(response);
         }
@@ -188,13 +189,13 @@ namespace ExamSystemApi.Controllers.V1
                 await services.CreateUser(request.Adapt<CreateUserDetailDto>());
                 response.State= ResponseStateEnum.SUCCESS;
                 response.Status = 200;
-                response.Message = "ok";
+                response.Message = StaticStrings.S_CreateUser;
             }
             catch
             {
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 400;
-                response.Message = "bad";
+                response.Message = StaticStrings.F_CreateUser;
             }
             return Ok(response);
         }
@@ -208,18 +209,18 @@ namespace ExamSystemApi.Controllers.V1
                 var result = await services.DeleteUser(id);
                 if (result)
                 {
-                    response.Message = "ok";
+                    response.Message = StaticStrings.S_DeleteUser;
                     response.State = ResponseStateEnum.SUCCESS;
                     response.Status = 200;
                     return Ok(response);
                 }
-                response.Message = "bad";
+                response.Message = StaticStrings.F_DeleteUser;
                 response.State = ResponseStateEnum.FAILED;
                 response.Status = 404;
             }
             catch
             {
-                response.Message = "bad";
+                response.Message = StaticStrings.ErrorInSystem;
                 response.State=ResponseStateEnum.FAILED;
                 response.Status = 404;
             }

@@ -11,6 +11,18 @@ namespace Domain.Common
         //S==>Successful
         //F==>Failed
 
+        #region User
+
+        public const string UserNotFound = "کاربر مورد نظر یافت نشد";
+        public const string S_CreateUser = "کاربر با موفقیت ایجاد شد";
+        public const string F_CreateUser = "کاربر ایجاد نشد";
+        public const string S_DeleteUser = "کاربر با موفقیت حذف شد";
+        public const string F_DeleteUser = "عملیات حذف کاربر انجام نشد";
+        public const string S_UpdateUser = "کاربر با موفقیت تغییر یافت شد";
+        public const string F_UpdateUser = "عملیات تغییر کاربر انجام نشد";
+
+        #endregion
+
         #region Academy
 
         public const string AcademyNotFound = "مؤسسه مورد نظر یافت نشد";
