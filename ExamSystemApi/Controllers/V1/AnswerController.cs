@@ -2,6 +2,7 @@
 using Domain.Common.Response;
 using Domain.Contracts.Services;
 using Domain.Dtos.AnswerDtos;
+using Domain.Entities;
 using ExamSystemApi.Models.Request.Answer;
 using ExamSystemApi.Models.Response.Academy;
 using ExamSystemApi.Models.Response.Answer;
@@ -90,12 +91,34 @@ namespace ExamSystemApi.Controllers.V1
                 response.Message = StaticStrings.S_CreateAnswer;
                 response.State=ResponseStateEnum.SUCCESS;
                 response.Status=200;
+                return Ok(response);
             }
             catch
             {
                 response.Message = StaticStrings.F_CreateAnswer;
+                response.State = ResponseStateEnum.FAILED;
+                response.Status = 400;
+            }
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("ChangeAnswer")]
+        public async Task <IActionResult> ChangeAnswer(ChangeAnswerRequest request)
+        {
+            var response = new ActionResponse<ChangeAnswerResponse>();
+            try
+            {
+                await answerServices.ChangeAnswer(request.Adapt<ChangeAnswerDetailDto>());
+                response.Message = StaticStrings.S_CreateAnswer;
                 response.State = ResponseStateEnum.SUCCESS;
                 response.Status = 200;
+            }
+            catch
+            {
+                response.Message = StaticStrings.F_CreateAnswer;
+                response.State = ResponseStateEnum.FAILED;
+                response.Status = 400;
             }
             return Ok(response);
         }
