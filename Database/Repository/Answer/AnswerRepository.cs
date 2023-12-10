@@ -38,6 +38,17 @@ namespace Database.Repository.Answer
         {
 
         }
+        public async Task<bool> ChangeAnswer(ChangeAnswerDetailDto dto)
+        {
+            var answer = await dbContext.Answers.FirstOrDefaultAsync(c => c.Id == dto.Id);
+            if (answer != null)
+            {
+                answer = dto.Adapt(answer);
+                await SaveChanges();
+                return true;
+            }
+            return false;
+        }
         public async Task AddAnswer(AddAnswerDetailDto dto)
         {
             await dbContext.Answers.AddAsync(dto.Adapt<Domain.Entities.Answer>());

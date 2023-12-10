@@ -13,6 +13,7 @@ namespace Domain.Contracts.Services
         public Task<GetAllAnswerDetailDto> GetAnswer();
         public Task UpdateAnswer();
         public Task DeleteAnswer();
+        public Task<bool> ChangeAnswer(ChangeAnswerDetailDto dto);
         public Task AddAnswer(AddAnswerDetailDto dto);
     }
 }

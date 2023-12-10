@@ -14,5 +14,6 @@ namespace Domain.Contracts.Repository
         public Task UpdateAnswer();
         public Task DeleteAnswer();
         public Task AddAnswer(AddAnswerDetailDto dto);
+        public Task<bool> ChangeAnswer(ChangeAnswerDetailDto dto);
     }
 }

@@ -36,7 +36,10 @@ namespace Application.Services
         {
             return await repository.GetAnswer();
         }
-
+        public async Task<bool> ChangeAnswer(ChangeAnswerDetailDto dto)
+        {
+            return await repository.ChangeAnswer(dto);
+        }
         public async Task UpdateAnswer()
         {
             await repository.UpdateAnswer();
